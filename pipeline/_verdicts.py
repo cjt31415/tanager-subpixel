@@ -14,17 +14,18 @@ from pathlib import Path
 
 import pandas as pd
 
-try:
-    from drift.common.my_logging import configure_logging
-except ImportError:  # pragma: no cover - exercised only in the standalone submission repo
-    # These stages are republished on their own (see `just exp35-publish-study`), where
-    # there is no drift to import. The fallback is deliberately plain: identical format,
-    # UTC instead of local time, so a log from either tree reads the same.
-    def configure_logging(log_level: str = "info") -> None:
-        """Root logger with the same line format drift uses, without drift."""
-        logging.basicConfig(level=getattr(logging, log_level.upper(), logging.INFO),
-                            format="%(asctime)s - %(levelname)s - %(message)s",
-                            datefmt="%Y-%m-%d %H:%M:%S", force=True)
+
+def configure_logging(log_level: str = "info") -> None:
+    """Root logger in drift's line format, without importing drift.
+
+    These stages are republished standalone (see ``just exp35-build-study``), where there
+    is no drift to import, so the experiment uses the same plain logger in both trees —
+    one code path. UTC timestamps, unlike drift's local-time formatter.
+    """
+    logging.basicConfig(level=getattr(logging, log_level.upper(), logging.INFO),
+                        format="%(asctime)s - %(levelname)s - %(message)s",
+                        datefmt="%Y-%m-%d %H:%M:%S", force=True)
+
 
 #: Column order of `metrics/verdicts.csv`, matching experiments 31 and 32 exactly so the
 #: three tables can be concatenated when the arc is written up.

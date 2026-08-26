@@ -6,3 +6,5 @@ __pycache__/
 # The Tanager cubes are 1.3 GB each and are fetched, not stored.
 data/tanager/*/*.h5
 data/tanager/*/PACE_OCI.*.nc
+# Run records, rewritten by every stage; the outputs beside them are the record that ships.
+data/*.log

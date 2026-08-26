@@ -52,19 +52,22 @@ gates were pre-registered and which were added on revision.
 
 ## Reproduce
 
-Stages 3 and 5 run from the data committed here — **no credentials, no downloads**:
+Stages 3, 4 and 5 run from the data committed here — **no credentials, no downloads**:
 
 ```bash
 pip install -r requirements.txt
 export EXP35_DATA_DIR=$PWD/data/tanager EXP35_OUT_DIR=$PWD/data
 
 python pipeline/compare.py        # stage 3 → gates V3/V4/V5, h_results.json
+python pipeline/tasking.py        # stage 4 → tasking_boxes.parquet, g4_tasking.json
 python pipeline/plot_figures.py   # stage 5 → figures F1, F3, F4
 ```
 
 That regenerates every number in the memo's result tables and three of its four figures.
 `tanager-io` is the only dependency not on PyPI; `requirements.txt` installs it from
-GitHub. Nothing else of ours is imported by the stages you can run here.
+GitHub. Nothing else of ours is imported: the two geographic helpers stage 4 needs
+(`pipeline/_geo.py`) are copied in by value, and this exact sequence is run in a fresh
+virtualenv before every push.
 
 **What needs more than this repo.** F2 (the resolution ladder) and the variance split
 need a Tanager cube — 1.3 GB, public, no account:
@@ -78,11 +81,11 @@ Stages 1 and 2 additionally need the PACE granules, which do require a free NASA
 Earthdata login in `~/.netrc`. The OLCI subsets are already committed; regenerating them
 from source needs a Copernicus Marine account. Both are noted in `pipeline/scenes.yaml`.
 
-`pipeline/tasking.py` (stage 4) is included for reading but **cannot run here**: it ranks
-every Tanager-footprint-sized box on Earth against the 395,340-profile BGC-Argo global
-index, which is far too large to ship, and it imports two helpers from
-[drift](https://github.com/cjt31415/drift). Its output — `data/tasking_boxes.parquet`,
-which is what figure F4 draws — is committed.
+Stage 4 ranks every Tanager-footprint-sized box on Earth against the BGC-Argo global
+index. The five columns it uses (395,340 profiles; float id, position, time, parameter
+list) are committed as `data/bgc_argo_index_subset.parquet` (8 MB), cut from the public
+GDAC `argo_bio-profile_index.txt` as of 2026-08-05; its output, `data/tasking_boxes.parquet`,
+is what figure F4 draws.
 
 ## The library
 

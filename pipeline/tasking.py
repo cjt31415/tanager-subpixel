@@ -2,7 +2,8 @@
 """
     tasking.py: exp 35 stage 4 — where a Tanager scene would buy the most.
 
-    Input:  data/ready/world/sensors/bgc_argo_index.parquet (the BGC-Argo index);
+    Input:  outputs/bgc_argo_index_subset.parquet (five columns of the BGC-Argo index,
+            written here from drift's full index on first run, shipped thereafter);
             tanager_open_scenes.json (the 153 open scenes);
             erie_insitu.csv (the western Lake Erie monitoring network).
     Output: outputs/tasking_boxes.parquet   candidate boxes, ranked, with what is in them
@@ -41,15 +42,17 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
+from _geo import haversine_km, top_boxes
 from _scenes import ERIE_INSITU, OUT_DIR, PROJECT_ROOT, SCENE_INVENTORY
 from _verdicts import configure_stage_logging, upsert_verdict, verdict_row
 
-from drift.common.geo import haversine_km
-from drift.density import top_boxes
-
 logger = logging.getLogger(__name__)
 
-BGC_INDEX = PROJECT_ROOT / "data" / "ready" / "world" / "sensors" / "bgc_argo_index.parquet"
+#: Drift's full BGC-Argo index (395k profiles, 14 columns, 17 MB) — present only in the
+#: drift tree. Stage 4 reads the five columns it uses from it once, and writes them next
+#: to the outputs as the subset below, which is what the standalone repo ships and reads.
+BGC_INDEX_FULL = PROJECT_ROOT / "data" / "ready" / "world" / "sensors" / "bgc_argo_index.parquet"
+INDEX_COLUMNS = ["PLATFORM_NUMBER", "LATITUDE", "LONGITUDE", "TIME", "parameters"]
 
 
 #: One Tanager footprint, in degrees. Measured across all 153 open scenes rather than
@@ -91,10 +94,27 @@ class StageConfig:
     recent_since: str = RECENT_SINCE
 
 
-def load_index() -> pd.DataFrame:
-    """The BGC-Argo profile index, with a CHLA flag derived from its parameter string."""
-    frame = pd.read_parquet(BGC_INDEX, columns=["PLATFORM_NUMBER", "LATITUDE", "LONGITUDE",
-                                                "TIME", "parameters"])
+def index_subset_path(out_dir: Path) -> Path:
+    return out_dir / "bgc_argo_index_subset.parquet"
+
+
+def load_index(out_dir: Path = OUT_DIR) -> pd.DataFrame:
+    """The BGC-Argo profile index, with a CHLA flag derived from its parameter string.
+
+    Reads the shipped subset when it is there; otherwise (in the drift tree) cuts it from
+    the full index and writes it, so the next run — and the standalone repo — need only
+    the subset. The subset is derived from the public GDAC ``argo_bio-profile_index.txt``.
+    """
+    subset = index_subset_path(out_dir)
+    if subset.exists():
+        frame = pd.read_parquet(subset)
+    elif BGC_INDEX_FULL.exists():
+        frame = pd.read_parquet(BGC_INDEX_FULL, columns=INDEX_COLUMNS)
+        out_dir.mkdir(parents=True, exist_ok=True)
+        frame.to_parquet(subset, index=False)
+        logger.info("wrote %s (%d rows) from drift's full index", subset, len(frame))
+    else:
+        raise FileNotFoundError(f"no BGC-Argo index: neither {subset} nor {BGC_INDEX_FULL}")
     frame["TIME"] = pd.to_datetime(frame["TIME"], utc=True, errors="coerce")
     frame["has_chla"] = frame["parameters"].str.contains("CHLA", na=False)
     return frame.dropna(subset=["LATITUDE", "LONGITUDE", "TIME"])
@@ -236,7 +256,7 @@ def main(out_dir: Path = OUT_DIR, top_n: int = 10, log_level: str = "info") -> i
     metrics_dir = out_dir / "metrics"
     metrics_dir.mkdir(parents=True, exist_ok=True)
 
-    index = load_index()
+    index = load_index(out_dir)
     scenes = scene_centres()
     logger.info("%d BGC profiles, %d floats, %s..%s; %d open Tanager scenes",
                 len(index), index["PLATFORM_NUMBER"].nunique(),
