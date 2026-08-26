@@ -1,0 +1,71 @@
+{
+  "olci": {
+    "scene": "lake_ontario",
+    "sensor": "olci",
+    "coarse_shape": [
+      65,
+      78
+    ],
+    "n_coarse_total": 5070,
+    "n_coarse_with_water": 1039,
+    "n_coarse_usable": 959,
+    "min_water_fraction": 0.9,
+    "tanager_water_px": 291838,
+    "tanager_px_assigned": 291838,
+    "median_px_per_coarse": 308.0,
+    "v2": {
+      "applicable": true,
+      "per_band": {
+        "443": {
+          "n": 952,
+          "correlation": 0.7753240394571812,
+          "slope_tanager_on_olci": 0.8978289100114307,
+          "spread_factor": 0.8978289100114307,
+          "sd_tanager": 0.0012712511228557993,
+          "sd_olci": 0.0010977943893522024
+        },
+        "490": {
+          "n": 952,
+          "correlation": 0.918896951453308,
+          "slope_tanager_on_olci": 1.128425320194456,
+          "spread_factor": 1.128425320194456,
+          "sd_tanager": 0.0018773486069945222,
+          "sd_olci": 0.001528758555650711
+        },
+        "560": {
+          "n": 952,
+          "correlation": 0.9548677335034401,
+          "slope_tanager_on_olci": 1.0864670129845153,
+          "spread_factor": 1.0864670129845153,
+          "sd_tanager": 0.002051180744407336,
+          "sd_olci": 0.0018027296755462885
+        }
+      },
+      "gated_bands": [
+        "490",
+        "560"
+      ],
+      "worst_gated_correlation": 0.918896951453308,
+      "worst_gated_spread_factor": 1.128425320194456,
+      "n_usable_pixels": 959
+    }
+  },
+  "pace": {
+    "scene": "lake_ontario",
+    "sensor": "pace",
+    "coarse_shape": [
+      1710,
+      1272
+    ],
+    "n_coarse_total": 2175120,
+    "n_coarse_with_water": 224,
+    "n_coarse_usable": 189,
+    "min_water_fraction": 0.9,
+    "tanager_water_px": 291838,
+    "tanager_px_assigned": 291838,
+    "median_px_per_coarse": 1597.0,
+    "v2": {
+      "applicable": false
+    }
+  }
+}

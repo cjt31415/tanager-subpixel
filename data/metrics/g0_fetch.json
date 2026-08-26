@@ -1,0 +1,61 @@
+{
+  "scenes": {
+    "lake_ontario": {
+      "tanager_id": "20250919_170233_04_4001",
+      "date": "2025-09-19",
+      "tanager": {
+        "file": "20250919_170233_04_4001_ortho_sr_hdf5.h5",
+        "bytes": 1312933079,
+        "action": "downloaded"
+      },
+      "pace": [
+        {
+          "file": "PACE_OCI.20250919T173946.L2.OC_AOP.V3_2.nc",
+          "bytes": 226228907,
+          "action": "downloaded"
+        },
+        {
+          "file": "PACE_OCI.20250919T173946.L2.OC_BGC.V3_2.nc",
+          "bytes": 16700929,
+          "action": "downloaded"
+        }
+      ],
+      "olci": {
+        "file": "olci_l3.nc",
+        "action": "downloaded",
+        "chl_valid_px": 2352,
+        "rrs_bands": 22
+      },
+      "problems": []
+    },
+    "loreto": {
+      "tanager_id": "20250831_185120_93_4001",
+      "date": "2025-08-31",
+      "tanager": {
+        "file": "20250831_185120_93_4001_ortho_sr_hdf5.h5",
+        "bytes": 1312617911,
+        "action": "downloaded"
+      },
+      "pace": [
+        {
+          "file": "PACE_OCI.20250831T193544.L2.OC_AOP.V3_2.nc",
+          "bytes": 125535387,
+          "action": "downloaded"
+        },
+        {
+          "file": "PACE_OCI.20250831T193544.L2.OC_BGC.V3_2.nc",
+          "bytes": 13314224,
+          "action": "downloaded"
+        }
+      ],
+      "olci": {
+        "file": "olci_l3.nc",
+        "action": "downloaded",
+        "chl_valid_px": 1940,
+        "rrs_bands": 22
+      },
+      "problems": []
+    }
+  },
+  "problems": []
+}

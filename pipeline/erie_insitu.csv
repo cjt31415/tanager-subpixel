@@ -1,0 +1,17 @@
+station,kind,lat,lon,depth_m,sampling,source
+WE02,GLERL weekly station,41.762,-83.330,5.4,"CTD cast; samples 0.75 m / ~4.25 m / 0.5 m above bottom; chl-a, phycocyanin, microcystin, nutrients; May–Oct since 2012",Boegehold et al. 2023 ESSD 15:3853 Table 1
+WE04,GLERL weekly station,41.827,-83.193,8.4,as WE02,Boegehold et al. 2023 Table 1
+WE06,GLERL weekly station,41.705,-83.385,2.9,as WE02,Boegehold et al. 2023 Table 1
+WE08,GLERL weekly station,41.834,-83.364,4.8,as WE02,Boegehold et al. 2023 Table 1
+WE09,GLERL weekly station,41.718,-83.424,2.7,as WE02 (2016–2021),Boegehold et al. 2023 Table 1
+WE12,GLERL weekly station,41.703,-83.254,6.6,as WE02,Boegehold et al. 2023 Table 1
+WE13,GLERL weekly station,41.741,-83.136,8.9,as WE02,Boegehold et al. 2023 Table 1
+WE14,GLERL weekly station,41.720,-83.010,9.3,as WE02 (2015 only),Boegehold et al. 2023 Table 1
+WE15,GLERL weekly station,41.617,-83.009,4.5,as WE02 (2015–2017),Boegehold et al. 2023 Table 1
+WE16,GLERL weekly station,41.660,-83.143,6.2,as WE02 (2018–),Boegehold et al. 2023 Table 1
+THLO1,C-MAN / GLERL RECON surface sonde,41.826,-83.194,,continuous met + water-quality,NDBC station table 2026-08-25
+45165,LimnoTech buoy (Toledo water intake; also TWCO1),41.704,-83.264,,continuous water-quality sonde,NDBC station table 2026-08-25
+45200,Canadian moored buoy,41.724,-83.370,,continuous,NDBC station table 2026-08-25
+45201,Canadian moored buoy,41.601,-82.781,,continuous,NDBC station table 2026-08-25
+45202,Canadian moored buoy,41.532,-82.941,,continuous,NDBC station table 2026-08-25
+45005,NDBC met buoy,41.677,-82.398,,continuous met,NDBC station table 2026-08-25

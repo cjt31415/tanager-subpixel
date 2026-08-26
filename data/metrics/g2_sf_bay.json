@@ -1,0 +1,71 @@
+{
+  "olci": {
+    "scene": "sf_bay",
+    "sensor": "olci",
+    "coarse_shape": [
+      60,
+      71
+    ],
+    "n_coarse_total": 4260,
+    "n_coarse_with_water": 800,
+    "n_coarse_usable": 279,
+    "min_water_fraction": 0.9,
+    "tanager_water_px": 124774,
+    "tanager_px_assigned": 124774,
+    "median_px_per_coarse": 315.0,
+    "v2": {
+      "applicable": true,
+      "per_band": {
+        "443": {
+          "n": 205,
+          "correlation": 0.6715036302048292,
+          "slope_tanager_on_olci": 0.9509378758380813,
+          "spread_factor": 0.9509378758380813,
+          "sd_tanager": 0.002824232708740393,
+          "sd_olci": 0.001994328573346138
+        },
+        "490": {
+          "n": 205,
+          "correlation": 0.8154293113795373,
+          "slope_tanager_on_olci": 1.530839251496524,
+          "spread_factor": 1.530839251496524,
+          "sd_tanager": 0.004462954442001682,
+          "sd_olci": 0.0023772737476974726
+        },
+        "560": {
+          "n": 205,
+          "correlation": 0.8783420033124036,
+          "slope_tanager_on_olci": 1.7964578969849356,
+          "spread_factor": 1.7964578969849356,
+          "sd_tanager": 0.006128322787161212,
+          "sd_olci": 0.0029963203705847263
+        }
+      },
+      "gated_bands": [
+        "490",
+        "560"
+      ],
+      "worst_gated_correlation": 0.8154293113795373,
+      "worst_gated_spread_factor": 1.7964578969849356,
+      "n_usable_pixels": 279
+    }
+  },
+  "pace": {
+    "scene": "sf_bay",
+    "sensor": "pace",
+    "coarse_shape": [
+      1710,
+      1272
+    ],
+    "n_coarse_total": 2175120,
+    "n_coarse_with_water": 41,
+    "n_coarse_usable": 9,
+    "min_water_fraction": 0.9,
+    "tanager_water_px": 124774,
+    "tanager_px_assigned": 29663,
+    "median_px_per_coarse": 1590.0,
+    "v2": {
+      "applicable": false
+    }
+  }
+}

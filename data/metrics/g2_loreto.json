@@ -1,0 +1,71 @@
+{
+  "olci": {
+    "scene": "loreto",
+    "sensor": "olci",
+    "coarse_shape": [
+      64,
+      65
+    ],
+    "n_coarse_total": 4160,
+    "n_coarse_with_water": 756,
+    "n_coarse_usable": 690,
+    "min_water_fraction": 0.9,
+    "tanager_water_px": 254947,
+    "tanager_px_assigned": 254947,
+    "median_px_per_coarse": 378.0,
+    "v2": {
+      "applicable": true,
+      "per_band": {
+        "443": {
+          "n": 685,
+          "correlation": 0.5837670861184684,
+          "slope_tanager_on_olci": 1.0278641762726979,
+          "spread_factor": 1.0278641762726979,
+          "sd_tanager": 0.0018951292970338445,
+          "sd_olci": 0.0010763233294710517
+        },
+        "490": {
+          "n": 685,
+          "correlation": 0.8079919284104699,
+          "slope_tanager_on_olci": 1.4942333308029527,
+          "spread_factor": 1.4942333308029527,
+          "sd_tanager": 0.003182426218804463,
+          "sd_olci": 0.0017208656063303351
+        },
+        "560": {
+          "n": 685,
+          "correlation": 0.8207826412827142,
+          "slope_tanager_on_olci": 1.4419545524881776,
+          "spread_factor": 1.4419545524881776,
+          "sd_tanager": 0.002767417151723188,
+          "sd_olci": 0.0015752562321722507
+        }
+      },
+      "gated_bands": [
+        "490",
+        "560"
+      ],
+      "worst_gated_correlation": 0.8079919284104699,
+      "worst_gated_spread_factor": 1.4942333308029527,
+      "n_usable_pixels": 690
+    }
+  },
+  "pace": {
+    "scene": "loreto",
+    "sensor": "pace",
+    "coarse_shape": [
+      1710,
+      1272
+    ],
+    "n_coarse_total": 2175120,
+    "n_coarse_with_water": 115,
+    "n_coarse_usable": 92,
+    "min_water_fraction": 0.9,
+    "tanager_water_px": 254947,
+    "tanager_px_assigned": 246980,
+    "median_px_per_coarse": 3075.0,
+    "v2": {
+      "applicable": false
+    }
+  }
+}

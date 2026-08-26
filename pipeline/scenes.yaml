@@ -1,0 +1,101 @@
+# Experiment 35 scenes — every id/URL below was verified live (2026-08-25).
+#
+# Tanager assets: <tanager_asset_base>/<asset>/<id>_<asset>.h5|tif
+#   ortho_sr_hdf5 (~1.24 GB, HDF-EOS5), ortho_beta_udm, ortho_radiance_hdf5,
+#   geolocation_array, ortho_visual, thumbnail (<id>_thumb.png)
+# PACE: obdaac-tea.earthdatacloud.nasa.gov; fetch by granule name with earthaccess (netrc).
+# OLCI: Copernicus Marine (~/.copernicusmarine login). CHL by ARCO subset; RRS by
+#   HTTP range-read of the global daily file. Overpass times are from the CDSE
+#   catalogue — the CMEMS L3 composite carries no time of its own.
+#
+# Scene selection is evidence-based; see DESIGN.md §13.3. Every thumbnail was inspected.
+# The Lake Erie pair was dropped (north scene is ~90 % downtown Detroit, south is a river
+# mouth at ~25 % water with the 2025 blooms 40 km southwest); Erie now appears only in the
+# tasking argument, which is the stronger use for it.
+
+tanager_asset_base: https://storage.googleapis.com/open-cogs/planet-stac/tanager1-release2-core-imagery
+
+olci:
+  chl_dataset_id: cmems_obs-oc_glo_bgc-plankton_my_l3-olci-300m_P1D     # ARCO subset works
+  rrs_dataset_id: cmems_obs-oc_glo_bgc-reflectance_my_l3-olci-300m_P1D  # range-read only
+  rrs_bands_nm: [400, 412, 443, 490, 510, 560, 620, 665, 674, 681, 709]
+  https_base: https://s3.waw3-1.cloudferro.com/mdl-native-16/native/OCEANCOLOUR_GLO_BGC_L3_MY_009_103/cmems_obs-oc_glo_bgc-reflectance_my_l3-olci-300m_P1D_202211
+
+pace:
+  aop_short_name: PACE_OCI_L2_AOP
+  bgc_short_name: PACE_OCI_L2_BGC
+
+scenes:
+  sf_bay:
+    role: >
+      Headline. Central San Francisco Bay and the Berkeley/Richmond shoals: strong
+      turbidity gradients between shallow flats and the deeper channel. NOTE the Golden
+      Gate itself is ~2.7 km WEST of the frame (bridge at -122.478, scene starts at
+      -122.448) — do not describe a plume through the Gate.
+    date: 2025-05-14
+    tanager_id: "20250514_193937_64_4001"
+    tanager_utc: "19:39:37"
+    tanager_epsg: 32610          # verified from StructMetadata.0 ZoneCode 10 + epsg_code attr
+    bbox: [-122.4482, 37.7766, -122.1559, 38.0123]
+    search_bbox: [-122.6, 37.6, -122.0, 38.1]
+    cloud_percent: 1
+    light_haze_percent: 29
+    pace_aop: PACE_OCI.20250514T193544.L2.OC_AOP.V3_2.nc   # 19:35:44 — 4 min before Tanager
+    pace_bgc: PACE_OCI.20250514T193544.L2.OC_BGC.V3_2.nc   # a 21:14 granule also exists; unused
+    olci_pass: "S3A 18:22"
+    olci_rrs_file: 2025/05/20250514_cmems_obs-oc_glo_bgc-reflectance_myint_l3-olci-300m_P1D.nc
+    olci_chl_valid_px: 3303
+    measured:                    # from the day-1 gate run, DESIGN §13.4
+      valid_px_frac: 0.498       # rotated strip; the rest is nodata margin
+      water_frac_of_valid: 0.339
+      ndwi_threshold: -0.2463
+
+  lake_ontario:
+    role: >
+      Freshwater case, replacing Lake Erie. Rochester nearshore: a sharp cross-shore
+      sediment front with 100 m filaments, fed by the Genesee River and Irondequoit Bay,
+      against deep clear offshore water. ~55 % water. Falls inside the ROCX 2025 open
+      community field campaign (RIT, 2025-09-04..22).
+    date: 2025-09-19
+    tanager_id: "20250919_170233_04_4001"
+    tanager_utc: "17:02:33"
+    tanager_epsg: null           # read from the file; expect 32618 (UTM 18N)
+    bbox: [-77.6361, 43.1227, -77.3021, 43.3838]
+    search_bbox: [-77.85, 42.95, -77.20, 43.50]
+    cloud_percent: 0
+    pace_aop: PACE_OCI.20250919T173946.L2.OC_AOP.V3_2.nc   # 17:39:46 — 37 min after Tanager
+    pace_bgc: PACE_OCI.20250919T173946.L2.OC_BGC.V3_2.nc
+    olci_pass: "S3 (CDSE OL_2_WFR, same day)"
+    olci_rrs_file: 2025/09/20250919_cmems_obs-oc_glo_bgc-reflectance_myint_l3-olci-300m_P1D.nc
+    olci_chl_valid_px: 2879
+
+  loreto:
+    role: >
+      Clear-water control. Gulf of California off Loreto: deep oligotrophic blue water
+      over most of the frame plus a bright shallow bank at the southeast, giving a large
+      optical dynamic range in one scene. Open water means clean, non-land-adjacent
+      PACE pixels — the counts SF Bay cannot supply.
+    date: 2025-08-31
+    tanager_id: "20250831_185120_93_4001"
+    tanager_utc: "18:51:20"
+    tanager_epsg: null           # expect 32612 (UTM 12N)
+    bbox: [-111.4987, 26.0218, -111.2383, 26.2766]
+    search_bbox: [-111.6, 25.9, -111.1, 26.4]
+    cloud_percent: 1
+    pace_aop: PACE_OCI.20250831T193544.L2.OC_AOP.V3_2.nc   # 19:35:44 — 44 min after Tanager
+    pace_bgc: PACE_OCI.20250831T193544.L2.OC_BGC.V3_2.nc
+    olci_pass: "S3B 17:20"
+    olci_rrs_file: 2025/08/20250831_cmems_obs-oc_glo_bgc-reflectance_myint_l3-olci-300m_P1D.nc
+    olci_chl_valid_px: 4002
+
+# Upgrade if time permits (DESIGN §7): the Lake Ontario repeat series, same box, 7 dates.
+# PACE granule counts checked 2026-08-25; 2025-08-01 has none, 2025-10-15 has only 111
+# valid OLCI pixels (cloud) so it is a Tanager-PACE date only.
+lake_ontario_repeats:
+  - {date: 2025-07-04, tanager_id: "20250704_165204_61_4001", pace: true,  olci_valid_px: 2800}
+  - {date: 2025-08-01, tanager_id: "20250801_165544_61_4001", pace: false, olci_valid_px: null}
+  - {date: 2025-09-03, tanager_id: "20250903_164714_08_4001", pace: true,  olci_valid_px: null}
+  - {date: 2025-09-19, tanager_id: "20250919_170233_04_4001", pace: true,  olci_valid_px: 2879}
+  - {date: 2025-10-01, tanager_id: "20251001_165049_07_4001", pace: true,  olci_valid_px: null}
+  - {date: 2025-10-15, tanager_id: "20251015_165255_92_4001", pace: true,  olci_valid_px: 111}
+  - {date: 2025-10-29, tanager_id: "20251029_165455_83_4001", pace: true,  olci_valid_px: null}

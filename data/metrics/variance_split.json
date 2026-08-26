@@ -1,0 +1,95 @@
+{
+  "sf_bay": {
+    "window_km": 14.4,
+    "ratio": {
+      "n_finite_30m_px": 36463,
+      "total_variance_30m": 0.022244039810488718,
+      "olci": {
+        "factor": 18,
+        "between_cell_fraction": 0.30801488794399345,
+        "within_cell_fraction": 0.6919851120560065
+      },
+      "pace": {
+        "factor": 40,
+        "between_cell_fraction": 0.24983337864639962,
+        "within_cell_fraction": 0.7501666213536003
+      }
+    },
+    "band": {
+      "n_finite_30m_px": 36536,
+      "total_variance_30m": 7.134501128069806e-05,
+      "olci": {
+        "factor": 18,
+        "between_cell_fraction": 0.2862810931894515,
+        "within_cell_fraction": 0.7137189068105485
+      },
+      "pace": {
+        "factor": 40,
+        "between_cell_fraction": 0.2198900875920349,
+        "within_cell_fraction": 0.7801099124079651
+      }
+    }
+  },
+  "lake_ontario": {
+    "window_km": 14.4,
+    "ratio": {
+      "n_finite_30m_px": 150770,
+      "total_variance_30m": 0.20775884978450165,
+      "olci": {
+        "factor": 18,
+        "between_cell_fraction": 0.28822363096560605,
+        "within_cell_fraction": 0.7117763690343939
+      },
+      "pace": {
+        "factor": 40,
+        "between_cell_fraction": 0.2547782740329992,
+        "within_cell_fraction": 0.7452217259670009
+      }
+    },
+    "band": {
+      "n_finite_30m_px": 156816,
+      "total_variance_30m": 4.560138285714458e-06,
+      "olci": {
+        "factor": 18,
+        "between_cell_fraction": 0.8579548835740951,
+        "within_cell_fraction": 0.1420451164259049
+      },
+      "pace": {
+        "factor": 40,
+        "between_cell_fraction": 0.730230419708641,
+        "within_cell_fraction": 0.269769580291359
+      }
+    }
+  },
+  "loreto": {
+    "window_km": 14.4,
+    "ratio": {
+      "n_finite_30m_px": 142748,
+      "total_variance_30m": 0.08114550750090962,
+      "olci": {
+        "factor": 18,
+        "between_cell_fraction": 0.3177742032676024,
+        "within_cell_fraction": 0.6822257967323976
+      },
+      "pace": {
+        "factor": 40,
+        "between_cell_fraction": 0.2208807371605063,
+        "within_cell_fraction": 0.7791192628394937
+      }
+    },
+    "band": {
+      "n_finite_30m_px": 144693,
+      "total_variance_30m": 2.8423600909365235e-05,
+      "olci": {
+        "factor": 18,
+        "between_cell_fraction": 0.8173423844714586,
+        "within_cell_fraction": 0.18265761552854143
+      },
+      "pace": {
+        "factor": 40,
+        "between_cell_fraction": 0.6466003298008711,
+        "within_cell_fraction": 0.3533996701991289
+      }
+    }
+  }
+}

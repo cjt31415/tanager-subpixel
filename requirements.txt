@@ -1,0 +1,21 @@
+# Enough to re-run stages 3 and 5 from the data committed here, and stage 0-2 if you
+# fetch the cubes yourself. Pinned loosely: nothing here depends on a narrow version.
+tanager-io @ git+https://github.com/cjt31415/tanager-io.git
+numpy
+pandas
+pyarrow
+xarray
+h5py
+h5netcdf
+dask
+scipy
+pyproj
+matplotlib
+cartopy
+scikit-image
+pyyaml
+# Stage 0 only (network + credentials; see README "What you cannot re-run here")
+# earthaccess
+# copernicusmarine
+# requests
+# fsspec

@@ -1,0 +1,164 @@
+{
+  "v5": {
+    "lake_ontario/olci": {
+      "n_boxes": 928,
+      "n_passing": 675,
+      "pass_rate": 0.7273706896551724,
+      "filter_on": "coarse_RRS560",
+      "median_between_pixel_cv_of_passing": 0.07551301388468223,
+      "n_passing_like_for_like": 673,
+      "median_tanager_between_pixel_cv_of_passing": 0.025460848561214885,
+      "within_over_between_like_for_like": 5.449047317774631,
+      "band_nm": 561.0,
+      "n_passing_band": 675,
+      "median_band_between_pixel_cv_of_passing": 0.16002777716862399,
+      "median_band_within_pixel_cv_of_passing": 0.10119569877331112,
+      "within_over_between_band": 0.6323633344396173,
+      "median_within_pixel_cv_of_passing": 0.13922202553170937,
+      "p90_within_pixel_cv_of_passing": 2.640857320202045,
+      "frac_passing_with_centre_above_threshold": 0.47555555555555556,
+      "frac_passing_with_any_pixel_above_threshold": 0.6607407407407407
+    },
+    "lake_ontario/pace": {
+      "n_boxes": 175,
+      "n_passing": 100,
+      "pass_rate": 0.5714285714285714,
+      "filter_on": "coarse_chlor_a",
+      "median_between_pixel_cv_of_passing": 0.08680658157414115,
+      "n_passing_like_for_like": 100,
+      "median_tanager_between_pixel_cv_of_passing": 0.02307422313582809,
+      "within_over_between_like_for_like": 4.581777519848763,
+      "band_nm": 561.0,
+      "n_passing_band": 100,
+      "median_band_between_pixel_cv_of_passing": 0.2269888570544305,
+      "median_band_within_pixel_cv_of_passing": 0.09930798007546449,
+      "within_over_between_band": 0.43750156445631627,
+      "median_within_pixel_cv_of_passing": 0.10572095685171137,
+      "p90_within_pixel_cv_of_passing": 0.43065288753344383,
+      "frac_passing_with_centre_above_threshold": 0.3,
+      "frac_passing_with_any_pixel_above_threshold": 0.69
+    },
+    "loreto/olci": {
+      "n_boxes": 693,
+      "n_passing": 470,
+      "pass_rate": 0.6782106782106783,
+      "filter_on": "coarse_RRS560",
+      "median_between_pixel_cv_of_passing": 0.027539536810748236,
+      "n_passing_like_for_like": 470,
+      "median_tanager_between_pixel_cv_of_passing": 0.03713767426528508,
+      "within_over_between_like_for_like": 3.625324287244025,
+      "band_nm": 561.0,
+      "n_passing_band": 470,
+      "median_band_between_pixel_cv_of_passing": 0.07613051095456289,
+      "median_band_within_pixel_cv_of_passing": 0.14178146139828568,
+      "within_over_between_band": 1.862347429704043,
+      "median_within_pixel_cv_of_passing": 0.1346361124856954,
+      "p90_within_pixel_cv_of_passing": 0.23357766500622498,
+      "frac_passing_with_centre_above_threshold": 0.38085106382978723,
+      "frac_passing_with_any_pixel_above_threshold": 0.7148936170212766
+    },
+    "loreto/pace": {
+      "n_boxes": 63,
+      "n_passing": 40,
+      "pass_rate": 0.6349206349206349,
+      "filter_on": "coarse_chlor_a",
+      "median_between_pixel_cv_of_passing": 0.03267636272219483,
+      "n_passing_like_for_like": 40,
+      "median_tanager_between_pixel_cv_of_passing": 0.038720475919092376,
+      "within_over_between_like_for_like": 3.3324130166429873,
+      "band_nm": 561.0,
+      "n_passing_band": 40,
+      "median_band_between_pixel_cv_of_passing": 0.13972503974461348,
+      "median_band_within_pixel_cv_of_passing": 0.16277055770437454,
+      "within_over_between_band": 1.164934774768239,
+      "median_within_pixel_cv_of_passing": 0.12903261796339477,
+      "p90_within_pixel_cv_of_passing": 0.2754778870967827,
+      "frac_passing_with_centre_above_threshold": 0.35,
+      "frac_passing_with_any_pixel_above_threshold": 0.975
+    },
+    "sf_bay/olci": {
+      "n_boxes": 243,
+      "n_passing": 243,
+      "pass_rate": 1.0,
+      "filter_on": "coarse_RRS560",
+      "median_between_pixel_cv_of_passing": 0.02945663090491389,
+      "n_passing_like_for_like": 243,
+      "median_tanager_between_pixel_cv_of_passing": 0.01668475429536109,
+      "within_over_between_like_for_like": 1.3058931938840115,
+      "band_nm": 561.0,
+      "n_passing_band": 243,
+      "median_band_between_pixel_cv_of_passing": 0.04448093022510455,
+      "median_band_within_pixel_cv_of_passing": 0.037774348613141495,
+      "within_over_between_band": 0.8492256888958242,
+      "median_within_pixel_cv_of_passing": 0.021788507075939073,
+      "p90_within_pixel_cv_of_passing": 0.044298465825798876,
+      "frac_passing_with_centre_above_threshold": 0.00823045267489712,
+      "frac_passing_with_any_pixel_above_threshold": 0.2880658436213992
+    }
+  },
+  "v3": {
+    "sf_bay/olci": {
+      "assessable": true,
+      "neighbour_difference": 0.013475141663861184,
+      "shuffled_difference": 0.04296802866806035,
+      "ratio": 0.3136085615646997,
+      "n_adjacent_pairs": 681,
+      "n_cells": 794
+    },
+    "sf_bay/pace": {
+      "assessable": false,
+      "n_adjacent_pairs": 19,
+      "n_cells": 41,
+      "note": "only 19 adjacent finite pairs; the statistic is undefined"
+    },
+    "lake_ontario/olci": {
+      "assessable": true,
+      "neighbour_difference": 0.0287107134027781,
+      "shuffled_difference": 0.1641615563475059,
+      "ratio": 0.17489303855040056,
+      "n_adjacent_pairs": 929,
+      "n_cells": 988
+    },
+    "lake_ontario/pace": {
+      "assessable": true,
+      "neighbour_difference": 0.040611694267138565,
+      "shuffled_difference": 0.21869374452902618,
+      "ratio": 0.1857012158925669,
+      "n_adjacent_pairs": 183,
+      "n_cells": 209
+    },
+    "loreto/olci": {
+      "assessable": true,
+      "neighbour_difference": 0.023572093100614727,
+      "shuffled_difference": 0.05399409666414201,
+      "ratio": 0.43656796866590003,
+      "n_adjacent_pairs": 697,
+      "n_cells": 749
+    },
+    "loreto/pace": {
+      "assessable": true,
+      "neighbour_difference": 0.07346436604443074,
+      "shuffled_difference": 0.09310935780439386,
+      "ratio": 0.78901162865677,
+      "n_adjacent_pairs": 89,
+      "n_cells": 114
+    }
+  },
+  "v4": {
+    "lake_ontario": {
+      "declared_relative_uncertainty": 0.03240938484668732,
+      "median_within_pixel_cv": 0.1652602670095332,
+      "multiple_of_floor": 5.099148527233619
+    },
+    "loreto": {
+      "declared_relative_uncertainty": 0.025548173114657402,
+      "median_within_pixel_cv": 0.13951686804560745,
+      "multiple_of_floor": 5.460933250274727
+    },
+    "sf_bay": {
+      "declared_relative_uncertainty": 0.014480099081993103,
+      "median_within_pixel_cv": 0.021788507075939073,
+      "multiple_of_floor": 1.5047208553313303
+    }
+  }
+}

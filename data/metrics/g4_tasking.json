@@ -1,0 +1,46 @@
+{
+  "box_deg": [
+    0.3,
+    0.2
+  ],
+  "n_profiles_indexed": 395340,
+  "n_floats_indexed": 2925,
+  "n_open_scenes": 153,
+  "ocean_top_by_floats": {
+    "lon_west": 7.65,
+    "lon_east": 7.95,
+    "lat_min": 43.25,
+    "lat_max": 43.45,
+    "n_floats": 27,
+    "n_profiles": 218,
+    "chla_profiles": 163,
+    "floats_since_2023": 9,
+    "nearest_open_scene_km": 645.365858901454,
+    "nearest_open_scene_place": "Kleingartach, Eppingen, Verwaltungsgemeinschaft Eppingen, Landkreis Heilbronn, Baden-W\u00fcrttemberg, Germany"
+  },
+  "min_nearest_scene_km_over_all_ocean_boxes": 116.0780466839652,
+  "erie": {
+    "centre": [
+      -83.28,
+      41.8
+    ],
+    "stations_in_proposed_box": 10,
+    "weekly_ctd_stations_in_box": 7,
+    "stations_total": 16,
+    "stations_inside_existing_scenes": 0,
+    "min_km_station_to_existing_scene_edge": 10.365850023670186,
+    "median_km_station_to_existing_scene_edge": 24.34301876052819,
+    "station_names_in_box": [
+      "WE02",
+      "WE04",
+      "WE06",
+      "WE08",
+      "WE09",
+      "WE12",
+      "WE13",
+      "THLO1",
+      "45165",
+      "45200"
+    ]
+  }
+}
