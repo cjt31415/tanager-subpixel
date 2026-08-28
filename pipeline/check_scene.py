@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-    check_scene.py: exp 35 stage 1 — gates V0 and V1, is this product usable over water?
+    check_scene.py: stage 1 — gates V0 and V1, is this product usable over water?
 
     Input:  data/tanager/<scene>/<id>_ortho_sr_hdf5.h5 (stage 0).
     Output: outputs/metrics/v0_v1_<scene>.json   the measured spectra and corner offsets
@@ -172,7 +172,7 @@ def main(scenes: list[str] | None = None, out_dir: Path = OUT_DIR,
     ledgers = {}
     for scene in load_scenes(keys=scenes):
         if not scene.sr_path.exists():
-            logger.warning("%s: no cube on disk — run exp35-fetch; skipping", scene.key)
+            logger.warning("%s: no cube on disk — run fetch_scenes.py; skipping", scene.key)
             continue
         logger.info("=== %s ===", scene.key)
         ledger = check_one(scene, config)
@@ -189,7 +189,7 @@ def main(scenes: list[str] | None = None, out_dir: Path = OUT_DIR,
                     water["green_over_nir"], water["relative_uncertainty_560"])
 
     if not ledgers:
-        raise RuntimeError("no scenes had a cube on disk — run exp35-fetch first")
+        raise RuntimeError("no scenes had a cube on disk — run fetch_scenes.py first")
 
     worst_shortfall = max(entry["v1_geometry"]["worst_shortfall_px"] for entry in ledgers.values())
     widest_margin = max(entry["v1_geometry"]["widest_margin_px"] for entry in ledgers.values())
@@ -226,7 +226,7 @@ def main(scenes: list[str] | None = None, out_dir: Path = OUT_DIR,
 
 def parse_opt() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Exp 35 stage 1: gates V0 (water usability) and V1 (georeferencing)",
+        description="Stage 1: gates V0 (water usability) and V1 (georeferencing)",
         formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--scenes", nargs="*", default=None)
     parser.add_argument("--out-dir", type=Path, default=OUT_DIR)

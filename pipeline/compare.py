@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-    compare.py: exp 35 stage 3 — the variance a match-up protocol cannot see.
+    compare.py: stage 3 — the variance a match-up protocol cannot see.
 
     Input:  outputs/<scene>_<sensor>_agg.parquet (stage 2); the OLCI/PACE files for grid
             shape; outputs/metrics/v0_v1_<scene>.json for the declared noise floor.
@@ -364,7 +364,7 @@ def main(scenes: list[str] | None = None, sensors: list[str] | None = None,
         floors[scene.key] = noise_floor(scene, config)
         for sensor in wanted_sensors:
             if not (out_dir / f"{scene.key}_{sensor}_agg.parquet").exists():
-                logger.warning("%s/%s: no aggregate — run exp35-aggregate", scene.key, sensor)
+                logger.warning("%s/%s: no aggregate — run aggregate.py", scene.key, sensor)
                 continue
             table = homogeneity_table(scene, sensor, config)
             table.to_parquet(out_dir / f"homogeneity_{scene.key}_{sensor}.parquet", index=False)
@@ -376,7 +376,7 @@ def main(scenes: list[str] | None = None, sensors: list[str] | None = None,
             spectral.append(spectral_comparison(scene, config))
 
     if not tables:
-        raise RuntimeError("no aggregates found — run exp35-aggregate first")
+        raise RuntimeError("no aggregates found — run aggregate.py first")
     everything = pd.concat(tables, ignore_index=True)
     if spectral:
         pd.concat(spectral, ignore_index=True).to_parquet(out_dir / "h1_spectral.parquet",
@@ -512,7 +512,7 @@ def main(scenes: list[str] | None = None, sensors: list[str] | None = None,
 
 def parse_opt() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Exp 35 stage 3: the variance a match-up protocol cannot see",
+        description="Stage 3: the variance a match-up protocol cannot see",
         formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--scenes", nargs="*", default=None)
     parser.add_argument("--sensors", nargs="*", default=None, choices=["olci", "pace"])

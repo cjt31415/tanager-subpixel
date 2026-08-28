@@ -1,5 +1,5 @@
 """
-    _geo.py: the two geographic helpers exp 35 stage 4 needs, by value.
+    _geo.py: the two geographic helpers stage 4 needs, by value.
 
     This is a deliberate copy, not an import. Stage 4 first imported
     ``drift.common.geo.haversine_km`` and ``drift.density.top_boxes``; the submission repo

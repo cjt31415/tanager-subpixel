@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-    tasking.py: exp 35 stage 4 — where a Tanager scene would buy the most.
+    tasking.py: stage 4 — where a Tanager scene would buy the most.
 
     Input:  outputs/bgc_argo_index_subset.parquet (five columns of the BGC-Argo index,
             written here from drift's full index on first run, shipped thereafter);
@@ -322,7 +322,7 @@ def main(out_dir: Path = OUT_DIR, top_n: int = 10, log_level: str = "info") -> i
 
 def parse_opt() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Exp 35 stage 4: where a Tanager scene would buy the most",
+        description="Stage 4: where a Tanager scene would buy the most",
         formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--top-n", type=int, default=10)
     parser.add_argument("--out-dir", type=Path, default=OUT_DIR)

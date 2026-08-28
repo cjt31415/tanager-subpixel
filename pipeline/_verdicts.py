@@ -1,4 +1,4 @@
-"""Exp 35 stage helpers (copied from experiment 34, unchanged): the verdict ledger, and a log file next to the outputs.
+"""Stage helpers: the verdict ledger, and a log file next to the outputs.
 
 Five stages each decide part of the experiment, so `metrics/verdicts.csv` is written
 incrementally rather than in one place (experiment 32 did the same thing by hand in

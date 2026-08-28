@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-    aggregate.py: exp 35 stage 2 — bin 30 m Tanager water pixels into coarse sensor pixels.
+    aggregate.py: stage 2 — bin 30 m Tanager water pixels into coarse sensor pixels.
 
     Input:  data/tanager/<scene>/<id>_ortho_sr_hdf5.h5, PACE_OCI.*.L2.OC_{AOP,BGC}.*.nc,
             olci_l3.nc  (stage 0); gates V0/V1 (stage 1).
@@ -432,7 +432,7 @@ def verify_only(scenes: list[str] | None, sensors: tuple[str, ...], out_dir: Pat
     for scene in load_scenes(keys=scenes):
         path = metrics_dir / f"g2_{scene.key}.json"
         if not path.exists():
-            raise FileNotFoundError(f"{path} missing — run exp35-aggregate without --verify-only")
+            raise FileNotFoundError(f"{path} missing — run aggregate.py without --verify-only")
         scene_ledger = json.loads(path.read_text())
         for sensor in sensors:
             aggregate_path = out_dir / f"{scene.key}_{sensor}_agg.parquet"
@@ -443,7 +443,7 @@ def verify_only(scenes: list[str] | None, sensors: tuple[str, ...], out_dir: Pat
         path.write_text(json.dumps(scene_ledger, indent=2))
         logger.info("%s: V2 re-gated from %s", scene.key, aggregate_path.name)
     if not ledgers:
-        raise RuntimeError("no scene ledgers found — run exp35-aggregate first")
+        raise RuntimeError("no scene ledgers found — run aggregate.py first")
     write_v2_verdict(ledgers, metrics_dir)
     print(json.dumps({key: entry.get("olci", {}).get("v2", {}).get("per_band", {})
                       for key, entry in ledgers.items()}, indent=2, default=str))
@@ -452,7 +452,7 @@ def verify_only(scenes: list[str] | None, sensors: tuple[str, ...], out_dir: Pat
 
 def parse_opt() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Exp 35 stage 2: bin Tanager water pixels into PACE/OLCI footprints",
+        description="Stage 2: bin Tanager water pixels into PACE/OLCI footprints",
         formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--scenes", nargs="*", default=None)
     parser.add_argument("--sensors", nargs="*", default=None, choices=["olci", "pace"])

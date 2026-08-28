@@ -8,7 +8,8 @@
 #   HTTP range-read of the global daily file. Overpass times are from the CDSE
 #   catalogue — the CMEMS L3 composite carries no time of its own.
 #
-# Scene selection is evidence-based; see DESIGN.md §13.3. Every thumbnail was inspected.
+# Scene selection is evidence-based; every thumbnail was inspected before download,
+# and two planned scenes (Golden Gate, Lake Erie) were replaced on that evidence.
 # The Lake Erie pair was dropped (north scene is ~90 % downtown Detroit, south is a river
 # mouth at ~25 % water with the 2025 blooms 40 km southwest); Erie now appears only in the
 # tasking argument, which is the stronger use for it.
@@ -45,7 +46,7 @@ scenes:
     olci_pass: "S3A 18:22"
     olci_rrs_file: 2025/05/20250514_cmems_obs-oc_glo_bgc-reflectance_myint_l3-olci-300m_P1D.nc
     olci_chl_valid_px: 3303
-    measured:                    # from the day-1 gate run, DESIGN §13.4
+    measured:                    # from the day-1 gate run (check_scene.py)
       valid_px_frac: 0.498       # rotated strip; the rest is nodata margin
       water_frac_of_valid: 0.339
       ndwi_threshold: -0.2463
@@ -88,7 +89,7 @@ scenes:
     olci_rrs_file: 2025/08/20250831_cmems_obs-oc_glo_bgc-reflectance_myint_l3-olci-300m_P1D.nc
     olci_chl_valid_px: 4002
 
-# Upgrade if time permits (DESIGN §7): the Lake Ontario repeat series, same box, 7 dates.
+# Possible extension: the Lake Ontario repeat series, same box, 7 dates.
 # PACE granule counts checked 2026-08-25; 2025-08-01 has none, 2025-10-15 has only 111
 # valid OLCI pixels (cloud) so it is a Tanager-PACE date only.
 lake_ontario_repeats:

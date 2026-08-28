@@ -29,7 +29,7 @@ contains it, and asked the question the protocol cannot: **where, across scale, 
 water's variance actually sit?**
 
 | scene | Tanager | PACE OCI | Δt | OLCI (CMEMS L3) |
-|--------------------------|--------|--------|------|-------------|
+|---|---|---|---|---|
 | San Francisco Bay, 2025-05-14 | 19:39:37 | 19:35:44 | **4 min** | S3A 18:22 |
 | Lake Ontario (Rochester), 2025-09-19 | 17:02:33 | 17:39:46 | 37 min | same day |
 | Loreto, Gulf of California, 2025-08-31 | 18:51:20 | 19:35:44 | 44 min | same day |
@@ -48,7 +48,7 @@ block sizes. It needs no threshold, no second instrument, and no protocol. We co
 for two quantities: the green/blue ratio, and plain 560 nm reflectance.
 
 | scene | | hidden inside an OLCI cell (~550 m) | hidden inside a PACE pixel (~1.2 km) |
-|----------------|----------------|-----------------|-----------------|
+|---|---|---|---|
 | San Francisco Bay | color · brightness | 69 % · 71 % | 75 % · 78 % |
 | Lake Ontario | color · brightness | **71 %** · 14 % | **75 %** · 27 % |
 | Loreto, Gulf of California | color · brightness | 68 % · 18 % | 78 % · 35 % |

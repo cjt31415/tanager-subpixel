@@ -162,7 +162,7 @@ variance is inside an OLCI cell.
 
 ## 6. Gates, and which were pre-registered
 
-Seven gates were written into `DESIGN.md` before the run and each is recorded in
+Seven gates were written down before the run and each is recorded in
 `data/metrics/verdicts.csv` with its statistic, threshold, verdict and a note.
 
 | gate | asks | verdict |

@@ -34,7 +34,6 @@ Workshop](https://www.go-bgc.org/event/go-bgc-float-data-and-science-workshop).
 ```
 MEMO.md                     the submission write-up
 METHODS.md                  how it is measured, the validation gate, full results
-docs/DESIGN.md              the pre-registration: gates V0-V6, written before the run
 pipeline/                   the six numbered stages, with the inputs they read beside
                             them: scenes.yaml, the 153-scene inventory, the Erie stations
 data/figures/               F1 homogeneity · F2 ladder · F3 pedestal · F4 tasking

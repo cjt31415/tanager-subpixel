@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-    plot_figures.py: exp 35 stage 5 — the figures.
+    plot_figures.py: stage 5 — the figures.
 
     Input:  outputs/homogeneity_*.parquet, tasking_boxes.parquet (stages 3-4);
             outputs/metrics/v0_v1_<scene>.json (stage 1);
@@ -81,7 +81,7 @@ def load_homogeneity(out_dir: Path) -> pd.DataFrame:
     """Every homogeneity table stage 3 wrote."""
     frames = [pd.read_parquet(path) for path in sorted(out_dir.glob("homogeneity_*.parquet"))]
     if not frames:
-        raise FileNotFoundError("no homogeneity tables — run exp35-compare first")
+        raise FileNotFoundError("no homogeneity tables — run compare.py first")
     return pd.concat(frames, ignore_index=True)
 
 
@@ -463,7 +463,7 @@ def main(out_dir: Path = OUT_DIR, dpi: int = 200, log_level: str = "info") -> in
     if (out_dir / "tasking_boxes.parquet").exists():
         written.append(figure_tasking(config))
     else:
-        logger.warning("no tasking_boxes.parquet — run exp35-tasking; skipping F4")
+        logger.warning("no tasking_boxes.parquet — run tasking.py; skipping F4")
     try:
         written.append(figure_ladder(config))
     except (FileNotFoundError, StopIteration) as error:
@@ -477,7 +477,7 @@ def main(out_dir: Path = OUT_DIR, dpi: int = 200, log_level: str = "info") -> in
 
 def parse_opt() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Exp 35 stage 5: figures",
+        description="Stage 5: figures",
         formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--out-dir", type=Path, default=OUT_DIR)
     parser.add_argument("--dpi", type=int, default=200)

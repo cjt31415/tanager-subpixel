@@ -1,4 +1,4 @@
-"""Exp 35 shared wiring: the scene table, and where each scene's files live on disk.
+"""Shared wiring: the scene table, and where each scene's files live on disk.
 
 `scenes.yaml` is the single source of truth for which scenes the experiment uses and
 which coincident PACE granule and OLCI file belong to each. Every stage reads it through

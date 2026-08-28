@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-    fetch_scenes.py: exp 35 stage 0 — download every scene and its coincident match-ups.
+    fetch_scenes.py: stage 0 — download every scene and its coincident match-ups.
 
     Input:  scenes.yaml (the scene table); ~/.netrc (NASA Earthdata);
             ~/.copernicusmarine (Copernicus Marine).
@@ -13,7 +13,7 @@
     already matches the server's Content-Length is skipped, and a partial download
     continues with an HTTP Range request rather than starting over.
 
-    The two OLCI paths are different on purpose (DESIGN §13.1): chlorophyll comes from
+    The two OLCI paths are different on purpose (see below): chlorophyll comes from
     Copernicus Marine's ARCO subset service in seconds, but the reflectance product has
     no subset service, so its 5.75 GB global daily file is range-read for the scene's
     bounding box — about 2 s per band against 17 GB of download avoided.
@@ -264,7 +264,7 @@ def main(scenes: list[str] | None = None, out_dir: Path = OUT_DIR, skip_pace: bo
 
 def parse_opt() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Exp 35 stage 0: download Tanager scenes and their PACE/OLCI match-ups",
+        description="Stage 0: download Tanager scenes and their PACE/OLCI match-ups",
         formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--scenes", nargs="*", default=None,
                         help="scene keys from scenes.yaml (default: all)")
