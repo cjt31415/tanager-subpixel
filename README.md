@@ -20,9 +20,9 @@ documentation.
   and brightness is what the standard homogeneity filter screens on, while what a
   match-up certifies is color-derived. **The filter is screening the one quantity that
   passes its own test.**
-- No open Tanager scene sits at any ocean-color validation site with in-situ truth.
-  The nearest open scene to the densest BGC-Argo box is 645 km away; two open scenes
-  cover western Lake Erie and miss all 16 NOAA GLERL stations by 10 km.
+- The open scenes and the in-situ networks miss each other. The nearest open scene to
+  the densest BGC-Argo box is 645 km away, none is within 116 km of any top box, and the
+  two over western Lake Erie miss all 16 NOAA GLERL stations by 10 km.
 
 The satellite-to-float join this bears on is an active one — see
 [CHLA-Z](https://fish-pace.github.io/chla-z/), which pairs PACE OCI L3 Rrs with Bio-Argo

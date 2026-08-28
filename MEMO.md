@@ -106,8 +106,9 @@ Three things follow, in increasing order of effort:
 2. **Do not read a passing box as a representative pixel.** The two are different claims
    about different scales, and the first is not evidence for the second.
 3. **Measure the term, at the sites where it matters.** It is now measurable. That is a
-   tasking question, and it is the one thing this study could not do: no open Tanager
-   scene sits at any ocean-color validation site with in-situ truth.
+   tasking question, and it is the one thing this study could not do: none of the 153 open
+   Tanager scenes lies within 116 km of a dense BGC-Argo box, and the two over Lake Erie
+   miss every GLERL station.
 
 **Who this reaches:** every satellite ocean-color validation program — NASA's PACE
 validation effort, ESA's OLCI cal/val, the AERONET-OC network — plus the BGC-Argo
