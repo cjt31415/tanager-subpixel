@@ -3,7 +3,7 @@
 **Measuring the sub-pixel variance that ocean-color match-up protocols assume away —
 with Tanager, PACE and Sentinel-3 over the same water on the same day.**
 
-**Charlie Turner** · 28 August 2026
+**Charlie Turner**, UC Davis · 28 August 2026
 
 Tanager Open Data Competition · three open scenes · methods and full results in
 [METHODS.md](METHODS.md) · code and data at
