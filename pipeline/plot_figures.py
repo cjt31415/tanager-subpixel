@@ -327,8 +327,8 @@ def figure_ladder(config: StageConfig, scene_key: str = "lake_ontario") -> Path:
 
     figure.suptitle(f"The same {size * 30 / 1000:.0f} km of water, three pixel sizes  ·  "
                     f"{SCENE_LABEL[scene_key]}, {scene.date}",
-                    fontsize=11.5, color=INK, x=0.02, ha="left", y=1.02)
-    figure.text(0.02, 0.945, "Green/blue reflectance ratio. Every panel is the same "
+                    fontsize=11.5, color=INK, x=0.02, ha="left", y=1.10)
+    figure.text(0.02, 1.0, "Green/blue reflectance ratio. Every panel is the same "
                 "Tanager measurement, block-averaged — only the pixel changes. The split "
                 "is exact (law of total variance);\nthe hidden fraction is an upper bound "
                 "on hidden *water* variance, since the 30 m panel's pushbroom striping "

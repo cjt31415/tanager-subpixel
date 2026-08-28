@@ -20,9 +20,10 @@ pixels around the station and accepts it when the **coefficient of variation acr
 That is a *between-pixel* statistic. It says nothing about the water **inside** each
 pixel — and it cannot, because the sensor doing the filtering is the sensor being
 validated. A PACE pixel is 1.2 km across. The protocol assumes what happens inside it is
-uniform enough not to matter. Nobody has been able to check.
+uniform enough not to matter. That assumption has never been checked with a
+hyperspectral sensor, on the same day, at this ratio of samples per pixel.
 
-Tanager can. At 30 m it resolves ~300 samples inside one Copernicus OLCI cell and
+Tanager can. At 30 m it resolves ~300 samples inside one Sentinel-3 OLCI cell (Copernicus L3) and
 1,600–3,000 inside one PACE pixel. We took three open Tanager scenes with same-day PACE
 OCI and Sentinel-3 OLCI coverage, binned every 30 m water pixel into the coarse pixel that
 contains it, and asked the question the protocol cannot: **where, across scale, does the
@@ -34,12 +35,23 @@ water's variance actually sit?**
 | Lake Ontario (Rochester), 2025-09-19 | 17:02:33 | 17:39:46 | 37 min | same day |
 | Loreto, Gulf of California, 2025-08-31 | 18:51:20 | 19:35:44 | 44 min | same day |
 
+*Times UTC. Δt is Tanager − PACE. OLCI comes from the Copernicus daily L3 merge, which
+keeps no pass time; the S3A time for San Francisco Bay is from the Sentinel-3 catalog.*
+
 Before any 30 m claim, Tanager has to reproduce a sensor that has none of its problems at
 a scale that sensor can see. Aggregated onto the OLCI grid it reproduces OLCI's *spatial
 variability* — not merely its pattern — to within **9 %** at Lake Ontario, and 44–80 %
-high at the two hazier scenes. That is what licenses everything below (METHODS §2).
+high at the two hazier scenes. The residual there is multiplicative, which the green/blue
+ratio divides out, and the headline below is a *fraction* of variance, which no overall
+scale factor can move. That is what licenses everything below (METHODS §2).
 
 ## The result
+
+![](data/figures/f2_ladder.png)
+
+***The same 14 km of Lake Ontario at 30 m, ~550 m and ~1.2 km.** The 560/490 nm
+ratio from one Tanager scene, block-averaged to each coarse pixel; the fraction of its
+variance that each pixel size hides is printed under the panel.*
 
 **Across all three scenes, roughly seven-tenths of the 30 m variance in the water's
 color is invisible to a ~550 m OLCI cell, and three-quarters to PACE.** This is an exact
@@ -99,18 +111,10 @@ Three things follow, in increasing order of effort:
 validation effort, ESA's OLCI cal/val, the AERONET-OC network — plus the BGC-Argo
 community, whose ~2,900 floats are compared to satellite pixels by exactly this logic.
 
-That comparison is not hypothetical; it is being built into products now.
-[CHLA-Z](https://fish-pace.github.io/chla-z/) trains a boosted regression tree on PACE
-OCI **L3-mapped** Rrs paired with in-situ Bio-Argo and OOI chlorophyll profiles, to
-estimate chlorophyll as a function of depth over 0–200 m globally. Its central join is
-the one measured here, one rung coarser again: a 4 km cell against a point profile. And
-the community that would use it convened at the **[GO-BGC Float Data and Science
-Workshop](https://www.go-bgc.org/event/go-bgc-float-data-and-science-workshop)**
-(University of Washington, 17–21 August 2026) to work exactly this class of float-data
-question. The sub-pixel term is a free parameter in every one of those joins.
-
-The method needs no new instrument — only a hyperspectral scene over a site that already
-has in-situ truth.
+That comparison is not hypothetical: [CHLA-Z](https://fish-pace.github.io/chla-z/) pairs
+PACE OCI **L3-mapped** Rrs (4 km) with Bio-Argo and OOI chlorophyll profiles to estimate
+chlorophyll with depth — the join measured here, one rung coarser again. The sub-pixel
+term is a free parameter in every such join.
 
 ## Where Tanager should go next
 
@@ -141,12 +145,18 @@ the same question of a fixed in-situ network instead.
 That second case is the whole argument in miniature. The scenes exist, the in-situ network
 exists, and they miss each other by ten kilometers.
 
+![](data/figures/f4_tasking.png)
+
+***Where a Tanager scene would buy the most.** The densest BGC-Argo boxes, one
+Tanager footprint each (marker area = distinct floats), the 153 open Tanager scenes, and
+the proposed western Lake Erie frame. No open scene lies within 116 km of any float
+box.*
+
 ## Limitations
 
 - **Tanager's atmospheric correction is tuned for land**, and over water its quality is
-  scene-dependent: median reflectance at 1600 nm, where physical water is under 0.01, runs
-  0.0025 (Lake Ontario) to 0.0971 (San Francisco Bay, which Planet flags at 29 % light
-  haze). We remove the residual per band from the darkest water in each scene.
+  scene-dependent — 1600 nm reflectance runs 0.0025 (Lake Ontario) to 0.097 (San Francisco
+  Bay, 29 % haze). We remove the residual per band from the darkest water in each scene.
 - **Every CV here is a lower bound**, and the hidden-variance fractions are **upper
   bounds** on hidden *water* variance — the pushbroom's column striping counts toward the
   within-cell term.
@@ -157,8 +167,6 @@ exists, and they miss each other by ten kilometers.
 METHODS §5 states each of these in full, §6 records which gates were pre-registered and
 which one was added on revision.
 
----
-
 *Data: Planet Tanager open scenes (CC-BY-4.0); NASA PACE OCI L2 (AOP, BGC); Copernicus
-Marine `OCEANCOLOUR_GLO_BGC_L3_MY_009_103`; the BGC-Argo global index; NOAA GLERL/CIGLR
+Marine OCEANCOLOUR_GLO_BGC_L3_MY_009_103; the BGC-Argo global index; NOAA GLERL/CIGLR
 station positions after Boegehold et al. 2023, ESSD 15:3853.*
