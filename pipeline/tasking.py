@@ -10,7 +10,7 @@
             outputs/metrics/g4_tasking.json the ledger, including the coverage gap
             outputs/metrics/verdicts.csv    V6
 
-    Experiment 35 measures a term that ocean-colour validation assumes away: how variable
+    Experiment 35 measures a term that ocean-color validation assumes away: how variable
     the water is *inside* a coarse pixel. Doing that at a site with in-situ truth would
     close the loop — and the open Tanager catalogue currently has no scene at any such
     site. This stage says where they are.
@@ -62,7 +62,7 @@ INDEX_COLUMNS = ["PLATFORM_NUMBER", "LATITUDE", "LONGITUDE", "TIME", "parameters
 BOX_DEG = (0.30, 0.20)
 
 #: Keep proposed sites this far apart, so the list is distinct regions rather than the
-#: same hotspot found repeatedly at neighbouring offsets.
+#: same hotspot found repeatedly at neighboring offsets.
 MIN_SEPARATION_DEG = 3.0
 
 #: Search grid for box placement. Finer than the box, coarse enough to stay quick.
@@ -72,7 +72,7 @@ CELL_DEG = 0.05
 #: is a historical fact, not a tasking target.
 RECENT_SINCE = "2023-01-01"
 
-#: The proposed freshwater scene: one Tanager footprint centred here holds the whole
+#: The proposed freshwater scene: one Tanager footprint centered here holds the whole
 #: GLERL/CIGLR western-basin network. See README section 4b.
 ERIE_CENTRE = (-83.28, 41.80)
 
@@ -164,10 +164,10 @@ def rank(index: pd.DataFrame, config: StageConfig, metric: str,
 
 
 def nearest_open_scene(lon: float, lat: float, scenes: pd.DataFrame) -> dict:
-    """Distance from a point to the nearest existing open Tanager scene centre.
+    """Distance from a point to the nearest existing open Tanager scene center.
 
     This is the tasking argument in one number: if the nearest open scene to the densest
-    float box in the ocean is hundreds of kilometres away, the catalogue cannot answer
+    float box in the ocean is hundreds of kilometers away, the catalogue cannot answer
     the question, however good the scenes in it are.
     """
     distance = haversine_km(lat, lon, scenes["lat_centre"].to_numpy(),
@@ -179,7 +179,7 @@ def nearest_open_scene(lon: float, lat: float, scenes: pd.DataFrame) -> dict:
 
 
 def scene_centres() -> pd.DataFrame:
-    """Centre of every open Tanager scene, from the committed inventory.
+    """Center of every open Tanager scene, from the committed inventory.
 
     Read through ``json.loads`` rather than ``pd.read_json``: a Tanager id looks like
     ``20250914_171527_18_4001``, and pandas reads that as the float 2.0250914e+19, after
@@ -207,8 +207,8 @@ def erie_box(config: StageConfig, scenes: pd.DataFrame) -> tuple[pd.DataFrame, d
                       & stations["lat"].between(lat_min, lat_max)]
 
     # How far the existing scenes are from the network they should have covered. The
-    # honest measure is distance to the scene *edge*, not its centre: a scene is ~26 km
-    # across, so a centre distance overstates the gap by up to half a footprint. The
+    # honest measure is distance to the scene *edge*, not its center: a scene is ~26 km
+    # across, so a center distance overstates the gap by up to half a footprint. The
     # question is whether a station was in frame at all.
     erie_scenes = scenes[scenes["id"].isin(EXISTING_ERIE_SCENES)]
     if erie_scenes.empty:

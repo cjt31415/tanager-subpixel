@@ -1,6 +1,6 @@
 # Tanager sub-pixel variance
 
-**How much of the water inside a satellite ocean-colour pixel does the validation
+**How much of the water inside a satellite ocean-color pixel does the validation
 protocol never see?** Measured with Planet Tanager (30 m, hyperspectral) against
 same-day PACE OCI and Sentinel-3 OLCI over three scenes.
 
@@ -13,14 +13,14 @@ documentation.
 
 ## The finding, in three lines
 
-- **~70 % of the 30 m variance in the water's *colour* is invisible to a 300 m sensor**
+- **~70 % of the 30 m variance in the water's *color* is invisible to a ~550 m OLCI cell**
   and ~75 % to PACE — an exact law-of-total-variance split, consistent across a turbid
   estuary, a clear-water gulf and a Great Lake.
 - Its *brightness* behaves the opposite way (14–18 % hidden at two of three scenes) —
   and brightness is what the standard homogeneity filter screens on, while what a
-  match-up certifies is colour-derived. **The filter is screening the one quantity that
+  match-up certifies is color-derived. **The filter is screening the one quantity that
   passes its own test.**
-- No open Tanager scene sits at any ocean-colour validation site with in-situ truth.
+- No open Tanager scene sits at any ocean-color validation site with in-situ truth.
   The nearest open scene to the densest BGC-Argo box is 645 km away; two open scenes
   cover western Lake Erie and miss all 16 NOAA GLERL stations by 10 km.
 
@@ -90,11 +90,11 @@ is what figure F4 draws.
 ## The library
 
 The reader is released separately as **[tanager-io](https://github.com/cjt31415/tanager-io)**
-(MIT, 24 offline tests), because a naive `xr.open_dataset` on a Tanager scene returns an
-empty `Dataset`. It absorbs the four things that cost a day: the data group's name
-contains a space; the wavelengths live in an attribute, not a coordinate; the
-georeferencing hides in a `StructMetadata.0` text blob and the grid is corner-registered;
-and fill is −9999 on the floats but 255 on the `uint8` flags.
+(MIT, 24 offline tests). Tanager scenes are HDF-EOS5, which `xarray` does not open
+directly, so the library handles the format's conventions in one place: the data group
+name, wavelengths carried as an attribute rather than a coordinate, corner-registered
+georeferencing parsed from `StructMetadata.0`, and the separate fill values on the float
+bands (−9999) and `uint8` flags (255).
 
 ```python
 import tanager_io as tio
@@ -112,13 +112,13 @@ noticed, because every statistic here is a coefficient of variation or a correla
 both are scale-free. That is why the pipeline now calls the library rather than
 reimplementing it.
 
-## Data and licences
+## Data and licenses
 
-| source | licence |
+| source | license |
 |---|---|
 | Planet Tanager open scenes | CC-BY-4.0 |
 | NASA PACE OCI L2 (AOP, BGC) | public domain |
-| Copernicus Marine `OCEANCOLOUR_GLO_BGC_L3_MY_009_103` | Copernicus licence |
+| Copernicus Marine `OCEANCOLOUR_GLO_BGC_L3_MY_009_103` | Copernicus license |
 | BGC-Argo global index | CC-BY-4.0 |
 | NOAA GLERL/CIGLR station positions | after Boegehold et al. 2023, ESSD 15:3853 |
 
@@ -126,6 +126,6 @@ Code in this repository is MIT (`LICENSE`). The memo and figures are CC-BY-4.0.
 
 ## Provenance
 
-Developed as experiment 35 of [drift](https://github.com/cjt31415/drift), where the full
-history lives — the brief, the design, and the commit trail. This repository is the
-self-contained submission: the stages, the derived data, and the evidence.
+Extracted from a larger private research codebase; this repository is the self-contained
+submission — the stages, the derived data, and the evidence. It re-runs from the committed
+data alone (see *Reproduce*).

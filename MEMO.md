@@ -1,6 +1,6 @@
 # The homogeneity nobody can check
 
-**Measuring the sub-pixel variance that ocean-colour match-up protocols assume away —
+**Measuring the sub-pixel variance that ocean-color match-up protocols assume away —
 with Tanager, PACE and Sentinel-3 over the same water on the same day.**
 
 Tanager Open Data Competition · three open scenes · methods and full results in
@@ -11,7 +11,7 @@ Tanager Open Data Competition · three open scenes · methods and full results i
 
 ## Project Summary
 
-Every satellite ocean-colour product is validated the same way: a satellite pixel is
+Every satellite ocean-color product is validated the same way: a satellite pixel is
 compared against an in-situ measurement, and the match-up is accepted only if the water
 looks homogeneous. The standard test (Bailey & Werdell 2006) takes a 5×5 box of satellite
 pixels around the station and accepts it when the **coefficient of variation across those
@@ -29,7 +29,7 @@ contains it, and asked the question the protocol cannot: **where, across scale, 
 water's variance actually sit?**
 
 | scene | Tanager | PACE OCI | Δt | OLCI (CMEMS L3) |
-|---|---|---|---|---|
+|--------------------------|--------|--------|------|-------------|
 | San Francisco Bay, 2025-05-14 | 19:39:37 | 19:35:44 | **4 min** | S3A 18:22 |
 | Lake Ontario (Rochester), 2025-09-19 | 17:02:33 | 17:39:46 | 37 min | same day |
 | Loreto, Gulf of California, 2025-08-31 | 18:51:20 | 19:35:44 | 44 min | same day |
@@ -42,34 +42,34 @@ high at the two hazier scenes. That is what licenses everything below (METHODS �
 ## The result
 
 **Across all three scenes, roughly seven-tenths of the 30 m variance in the water's
-colour is invisible to a 300 m sensor, and three-quarters to PACE.** This is an exact
+color is invisible to a ~550 m OLCI cell, and three-quarters to PACE.** This is an exact
 split — the law of total variance applied to one field over one 14.4 km window at two
 block sizes. It needs no threshold, no second instrument, and no protocol. We computed it
 for two quantities: the green/blue ratio, and plain 560 nm reflectance.
 
 | scene | | hidden inside an OLCI cell (~550 m) | hidden inside a PACE pixel (~1.2 km) |
-|---|---|---|---|
-| San Francisco Bay | colour · brightness | 69 % · 71 % | 75 % · 78 % |
-| Lake Ontario | colour · brightness | **71 %** · 14 % | **75 %** · 27 % |
-| Loreto, Gulf of California | colour · brightness | 68 % · 18 % | 78 % · 35 % |
+|----------------|----------------|-----------------|-----------------|
+| San Francisco Bay | color · brightness | 69 % · 71 % | 75 % · 78 % |
+| Lake Ontario | color · brightness | **71 %** · 14 % | **75 %** · 27 % |
+| Loreto, Gulf of California | color · brightness | 68 % · 18 % | 78 % · 35 % |
 
 **The two quantities do not agree, and the disagreement is the sharpest result here.**
-The water's *colour* varies at fine scale: seven-tenths of it is inside the pixel, in
+The water's *color* varies at fine scale: seven-tenths of it is inside the pixel, in
 every scene. Its *brightness* mostly does not — at Lake Ontario and Loreto, 86 % and 82 %
 of the brightness variance is between OLCI cells, exactly the scale a coarse sensor
-resolves. (San Francisco Bay, uniformly turbid at half a kilometre with no large-scale
-gradient to carry brightness variance, behaves like its colour field.)
+resolves. (San Francisco Bay, uniformly turbid at half a kilometer with no large-scale
+gradient to carry brightness variance, behaves like its color field.)
 
 That is why the homogeneity filter looks like it is working. **It is applied to
 brightness** — the coarse sensor's reflectance or its chlorophyll retrieval — **and
 brightness is the quantity whose variance a coarse sensor can mostly see.** What a
-match-up then certifies is a colour-derived quantity, and colour's variance is where the
+match-up then certifies is a color-derived quantity, and color's variance is where the
 filter cannot look. The filter is screening the one thing that passes its own test.
 
 The same finding in the protocol's own terms: across **1,528 boxes that pass the standard
-CV < 0.15 filter**, the water's colour inside an accepted pixel is **3.3–5.4× more
+CV < 0.15 filter**, the water's color inside an accepted pixel is **3.3–5.4× more
 variable than it is between the accepted pixels** at Lake Ontario and Loreto, and 1.3× at
-San Francisco Bay. **36 % of accepted boxes have a centre pixel whose own interior is
+San Francisco Bay. **36 % of accepted boxes have a center pixel whose own interior is
 more variable than the 0.15 threshold the box just cleared; 63 % contain such a pixel
 somewhere.** Per-scene numbers, the brightness variant, and three supporting checks — the
 variability is spatially structured rather than noise, and clears Tanager's own declared
@@ -82,7 +82,7 @@ useful screen against *scene-scale* patchiness — cloud edges, fronts crossing 
 and it is doing that job. But it is routinely read as evidence that a point measurement
 represents the pixel, and on this evidence it does not support that reading: the quantity
 it screens and the quantity it certifies have their variance at different scales.
-Brightness is mostly resolvable and passes; colour, which is what a chlorophyll retrieval
+Brightness is mostly resolvable and passes; color, which is what a chlorophyll retrieval
 is built from, is 68–71 % sub-pixel in every scene we measured.
 
 Three things follow, in increasing order of effort:
@@ -93,9 +93,9 @@ Three things follow, in increasing order of effort:
    about different scales, and the first is not evidence for the second.
 3. **Measure the term, at the sites where it matters.** It is now measurable. That is a
    tasking question, and it is the one thing this study could not do: no open Tanager
-   scene sits at any ocean-colour validation site with in-situ truth.
+   scene sits at any ocean-color validation site with in-situ truth.
 
-**Who this reaches:** every satellite ocean-colour validation programme — NASA's PACE
+**Who this reaches:** every satellite ocean-color validation program — NASA's PACE
 validation effort, ESA's OLCI cal/val, the AERONET-OC network — plus the BGC-Argo
 community, whose ~2,900 floats are compared to satellite pixels by exactly this logic.
 
@@ -114,22 +114,24 @@ has in-situ truth.
 
 ## Where Tanager should go next
 
-We ranked every Tanager-footprint-sized box on Earth (0.30° × 0.20°, the median of all 153
-open scenes) by BGC-Argo float density, using both readings of "dense", because they
-disagree: ranking by *profiles* selects marginal seas where a few trapped floats cycle
-fast; ranking by *distinct floats* selects where a scene would catch a fleet.
+Two sites, chosen two ways. For the open ocean we ranked every Tanager-footprint-sized box
+on Earth (0.30° × 0.20°, the median of all 153 open scenes) by BGC-Argo float density,
+using both readings of "dense", because they disagree: ranking by *profiles* selects
+marginal seas where a few trapped floats cycle fast; ranking by *distinct floats* selects
+where a scene would catch a fleet. For fresh water, where there are no floats, we asked
+the same question of a fixed in-situ network instead.
 
 - **Ocean — the Ligurian Sea (7.65–7.95 °E, 43.25–43.45 °N).** 27 distinct BGC-Argo
   floats, 218 profiles, **163 of them carrying chlorophyll**, 9 floats still there since
   2023. We ranked this box on float density alone, with no knowledge of what else is
   there — and it contains **BOUSSOLE (43°22′ N, 7°54′ E)**, the buoy that has provided
-  Europe's ocean-colour vicarious calibration and validation time series since 2003.
+  Europe's ocean-color vicarious calibration and validation time series since 2003.
   One Tanager footprint would cover the mooring, the float cluster and the water they
   share — and would, for the first time, put a measured sub-pixel term on a
   satellite-to-float chlorophyll match-up rather than an assumed one. **The nearest open
   Tanager scene is 645 km away, inland in Germany; no open scene lies within 116 km of
   any of the top float boxes.**
-- **Freshwater — western Lake Erie (centre 41.80 °N, 83.28 °W).** The longest
+- **Freshwater — western Lake Erie (center 41.80 °N, 83.28 °W).** The longest
   cyanobacteria-bloom record in North America, with NOAA GLERL/CIGLR sampling three depths
   weekly at seven master stations. Two open Tanager scenes already cover the western basin
   — and **not one of the 16 stations falls inside either frame**; the nearest is 10.4 km
@@ -137,7 +139,7 @@ fast; ranking by *distinct floats* selects where a scene would catch a fleet.
   CTD stations**, plus two continuous buoys.
 
 That second case is the whole argument in miniature. The scenes exist, the in-situ network
-exists, and they miss each other by ten kilometres.
+exists, and they miss each other by ten kilometers.
 
 ## Limitations
 
@@ -148,7 +150,7 @@ exists, and they miss each other by ten kilometres.
 - **Every CV here is a lower bound**, and the hidden-variance fractions are **upper
   bounds** on hidden *water* variance — the pushbroom's column striping counts toward the
   within-cell term.
-- Variability is measured on a **band ratio, not chlorophyll** — the colour signal a
+- Variability is measured on a **band ratio, not chlorophyll** — the color signal a
   retrieval is built from, not the retrieval itself.
 - **No in-situ data are used.** That is the point of the tasking section.
 

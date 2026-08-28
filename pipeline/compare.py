@@ -9,7 +9,7 @@
             outputs/metrics/h_results.json                 V3, V4, V5 with their numbers
             outputs/metrics/verdicts.csv                   V3, V4, V5
 
-    **The question.** Ocean-colour validation protocols (Bailey & Werdell 2006, Remote
+    **The question.** Ocean-color validation protocols (Bailey & Werdell 2006, Remote
     Sens. Environ. 102:12) accept a satellite-to-in-situ match-up when a 5x5 box of
     satellite pixels around the station has a coefficient of variation under 0.15. That
     is a *between-pixel* statistic: it is computed across the 25 coarse pixels. It is
@@ -34,9 +34,9 @@
     secondary is plain 560 nm reflectance. They do not agree — the ratio hides three to
     five times more variance inside a pixel than between pixels, the band often less than
     one — and that disagreement is a result, not a defect. A brightness field and a
-    colour field have different spatial spectra: brightness in these scenes varies mostly
-    at scales a coarse sensor resolves, colour mostly at scales it does not. Since a
-    match-up certifies a colour-derived quantity (chlorophyll) using a filter applied to
+    color field have different spatial spectra: brightness in these scenes varies mostly
+    at scales a coarse sensor resolves, color mostly at scales it does not. Since a
+    match-up certifies a color-derived quantity (chlorophyll) using a filter applied to
     brightness, both numbers belong in the record. Reporting only the larger would be a
     choice made after seeing the answer.
 
@@ -90,7 +90,7 @@ PRIMARY_RATIO = "green_blue"
 #: A second scalar, measured the same way and reported beside the first: the plain
 #: reflectance at this wavelength. The answer to "how much variance is hidden inside a
 #: pixel" is not a property of the water alone — it depends on which quantity is being
-#: asked about, because a brightness field and a colour field have different spatial
+#: asked about, because a brightness field and a color field have different spatial
 #: spectra. Reporting only the one that gives the larger answer would be a choice made
 #: after seeing the result, so both are computed.
 SECONDARY_BAND_NM = 560.0
@@ -108,7 +108,7 @@ RATIO_MEAN_RANGE = (0.2, 5.0)
 V3_MAX_NEIGHBOUR_RATIO = 0.75
 
 #: V3 needs this many horizontally adjacent finite pairs to mean anything. On a sparse
-#: grid — a PACE swath holding a handful of usable pixels — neighbouring cells are rarely
+#: grid — a PACE swath holding a handful of usable pixels — neighboring cells are rarely
 #: both finite, and the statistic is undefined rather than failed.
 V3_MIN_ADJACENT_PAIRS = 50
 
@@ -219,7 +219,7 @@ def homogeneity_table(scene: Scene, sensor: str, config: StageConfig) -> pd.Data
     shape = coarse_shape(scene, sensor, config.out_dir)
 
     # What the protocol filters on: the coarse sensor's own retrieval. Use its green
-    # reflectance, the band every ocean-colour algorithm leans on.
+    # reflectance, the band every ocean-color algorithm leans on.
     candidates = [name for name in ("coarse_RRS560", "coarse_Rrs_560", "coarse_CHL",
                                     "coarse_chlor_a") if name in frame.columns]
     if not candidates:
@@ -261,7 +261,7 @@ def homogeneity_table(scene: Scene, sensor: str, config: StageConfig) -> pd.Data
     edge = config.box // 2
     centre_within = within_grid[edge:-edge or None, edge:-edge or None]
     centre_water = fraction_grid[edge:-edge or None, edge:-edge or None]
-    # The most heterogeneous pixel anywhere in the box, not only at its centre: the
+    # The most heterogeneous pixel anywhere in the box, not only at its center: the
     # protocol accepts the whole box, so any pixel in it can be the one used.
     with warnings.catch_warnings():
         warnings.simplefilter("ignore", RuntimeWarning)
@@ -413,7 +413,7 @@ def main(scenes: list[str] | None = None, sensors: list[str] | None = None,
                                                   if between_median else float("nan")),
             # The same decomposition on a plain band. Reported beside the ratio, not
             # instead of it: the two disagree, and which one is relevant depends on
-            # whether the quantity being validated is a brightness or a colour.
+            # whether the quantity being validated is a brightness or a color.
             "band_nm": float(group["band_nm"].iloc[0]) if len(group) else float("nan"),
             "n_passing_band": int(len(band)),
             "median_band_between_pixel_cv_of_passing": band_between_median,
@@ -491,7 +491,7 @@ def main(scenes: list[str] | None = None, sensors: list[str] | None = None,
                     "separately in h_results.json. Within-pixel CV is a lower bound: the "
                     "additive atmospheric pedestal inflates the mean and so deflates "
                     "every CV. The same decomposition on plain 560 nm reflectance "
-                    "instead of the colour ratio gives "
+                    "instead of the color ratio gives "
                     + "; ".join(f"{key} {value:.1f}x" for key, value in band_ratios.items())
                     + " — the answer depends on which quantity is asked about, and both "
                     "are reported"),

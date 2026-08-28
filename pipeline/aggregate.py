@@ -11,7 +11,7 @@
     One row per coarse (PACE or OLCI) pixel, carrying:
 
     * how many Tanager water pixels fell inside it, and what fraction of it they cover;
-    * the mean and standard deviation of every Tanager band in the ocean-colour range;
+    * the mean and standard deviation of every Tanager band in the ocean-color range;
     * the mean, standard deviation, and extremes of each *derived 30 m scalar* — the
       band ratios. These cannot be recovered from per-band moments, because the mean of
       a ratio is not the ratio of the means, and it is exactly this difference the
@@ -29,8 +29,8 @@
     of it. Correlation alone is scale-invariant and would pass a Tanager field with ten
     times OLCI's spread — see :func:`check_v2`.
 
-    Assignment is nearest-centre (a Voronoi partition) via a KD-tree in the scene's UTM
-    metres, rather than building and rasterising footprint polygons: for a smooth swath
+    Assignment is nearest-center (a Voronoi partition) via a KD-tree in the scene's UTM
+    meters, rather than building and rasterising footprint polygons: for a smooth swath
     the two are equivalent, and this one has no topology to get wrong.
 
     Offline. ~3 min per scene, dominated by reading ~100 bands off disk.
@@ -55,7 +55,7 @@ from scipy.spatial import cKDTree
 
 logger = logging.getLogger(__name__)
 
-#: Tanager bands whose per-pixel moments are kept. The ocean-colour range; beyond ~900 nm
+#: Tanager bands whose per-pixel moments are kept. The ocean-color range; beyond ~900 nm
 #: water is black and the bands carry only the atmosphere.
 BAND_RANGE_NM = (400.0, 900.0)
 
@@ -110,10 +110,10 @@ class StageConfig:
 
 
 def coarse_centres(scene: Scene, sensor: str) -> tuple[np.ndarray, np.ndarray, xr.Dataset]:
-    """Longitude and latitude of every coarse pixel centre, flattened, plus its dataset.
+    """Longitude and latitude of every coarse pixel center, flattened, plus its dataset.
 
     OLCI arrives as a regular lat/lon grid and PACE as a swath with two-dimensional
-    navigation arrays; both are reduced to flat centre vectors so the caller does not
+    navigation arrays; both are reduced to flat center vectors so the caller does not
     care which it has.
     """
     if sensor == "olci":
@@ -139,7 +139,7 @@ def assign_labels(dataset: xr.Dataset, water: np.ndarray, lon: np.ndarray, lat: 
 
     Returns ``(labels, keep, n_coarse)`` where ``labels`` indexes the flattened coarse
     grid, ``keep`` selects the Tanager water pixels that fell within one coarse pixel
-    spacing of a centre (the rest are outside the swath), and ``n_coarse`` is the size of
+    spacing of a center (the rest are outside the swath), and ``n_coarse`` is the size of
     the flattened coarse grid.
     """
     to_utm = Transformer.from_crs("EPSG:4326", dataset.attrs["crs"], always_xy=True)
@@ -150,7 +150,7 @@ def assign_labels(dataset: xr.Dataset, water: np.ndarray, lon: np.ndarray, lat: 
     grid_x, grid_y = np.meshgrid(dataset["x"].values, dataset["y"].values)
     distance, nearest = tree.query(np.column_stack([grid_x[water], grid_y[water]]), k=1)
 
-    # A Tanager pixel further from every coarse centre than the coarse spacing is not
+    # A Tanager pixel further from every coarse center than the coarse spacing is not
     # inside any coarse pixel — it is off the edge of the swath.
     spacing = float(np.median(tree.query(np.column_stack([coarse_x, coarse_y]), k=2)[0][:, 1]))
     keep = distance <= spacing

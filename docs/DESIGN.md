@@ -51,13 +51,13 @@ only reads parquet and PNGs. Submission is one entry via the SurveyMonkey link, 
    comparison (normalised at 555 nm); absolute level is reported but not scored.
 4. **One chl-a algorithm across all three sensors, at the coarse sensor's bands.** The
    sub-pixel CV (H2) must not be contaminated by algorithm differences, so Tanager is
-   band-resampled to OLCI (Gaussian SRF from published OLCI centre/width) and to PACE
+   band-resampled to OLCI (Gaussian SRF from published OLCI center/width) and to PACE
    (5 nm — direct linear interpolation), then the same OC4-form blue/green ratio is applied
    to Tanager-resampled, OLCI and PACE alike. The sensors' own products (`chlor_a`,
    `CHL_OC4ME`, `CHL_NN`) are compared *separately* as "what the user would get".
 5. **Coarse pixel footprints from the L2 lat/lon, not from a reprojection.** PACE and OLCI
    L2 are swath products. Each coarse pixel becomes a polygon from the midpoints to its
-   four neighbours (in UTM), and Tanager water pixels are binned into it. Edge rows lose
+   four neighbors (in UTM), and Tanager water pixels are binned into it. Edge rows lose
    their footprint and are dropped. Reported as N per pixel.
 6. **Erie gets a cyanobacteria index, not just chl-a.** Tanager at 5 nm resolves the
    phycocyanin absorption at 620 nm; OLCI has 620 nm; PACE has it too. Stage 3 computes the
@@ -167,7 +167,7 @@ Outputs: `outputs/h1_spectral.parquet`, `outputs/h2_subpixel.parquet`,
 
 Ocean: run exp 20's `hotspots.py` machinery with `--box-deg 0.30 0.22`, top 10 by
 distinct floats and top 10 by profiles, all years and last 24 months, adding a
-`since_2023` column and a `chla_profiles` column. Freshwater: the Erie box centred at
+`since_2023` column and a `chla_profiles` column. Freshwater: the Erie box centered at
 41.80 N, −83.28 with the in-situ inventory from README §4b (a small table committed as
 `erie_insitu.csv`, coordinates from Boegehold et al. 2023 Table 1 and the NDBC station
 table). Output `outputs/tasking_boxes.parquet` and `outputs/tasking_map.png` (world
@@ -230,9 +230,9 @@ never re-raised. Submission itself happens outside the repo; the notebook and
   or to present only the reflectance-shape and CV results and keep chl-a for Loreto. Decide
   after seeing F3 on day 2; default is to show both and say OC4 is a *consistency* metric,
   not a chl-a claim.
-- Which PACE pixel geometry to trust: L2 `latitude/longitude` centres with midpoint
+- Which PACE pixel geometry to trust: L2 `latitude/longitude` centers with midpoint
   polygons (chosen) vs the pixel-corner fields if the granule carries them (check in G0).
-- Whether OLCI 300 m is aggregated into PACE for H3 (chosen) or PACE is nearest-neighbour
+- Whether OLCI 300 m is aggregated into PACE for H3 (chosen) or PACE is nearest-neighbor
   sampled at OLCI pixels (more rows, wrong scale).
 
 ## 13. What the build changed — superseded decisions

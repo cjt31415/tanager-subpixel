@@ -10,9 +10,9 @@
             outputs/figures/f3_pedestal.png     what the product does over water
             outputs/figures/f4_tasking.png      where a scene would buy the most
 
-    Colours are the validated categorical palette (blue/orange/aqua, checked for
-    colour-vision separation and lightness band) with scene as hue and sensor as marker
-    shape, so identity never rests on colour alone.
+    Colors are the validated categorical palette (blue/orange/aqua, checked for
+    color-vision separation and lightness band) with scene as hue and sensor as marker
+    shape, so identity never rests on color alone.
 
     Offline. ~1 min, dominated by reading a few Tanager bands for the ladder.
 """
@@ -39,7 +39,7 @@ logger = logging.getLogger(__name__)
 SCENE_COLOUR = {"sf_bay": "#2a78d6", "lake_ontario": "#eb6834", "loreto": "#1baf7a"}
 SCENE_LABEL = {"sf_bay": "San Francisco Bay", "lake_ontario": "Lake Ontario",
                "loreto": "Loreto, Gulf of California"}
-#: Sensor as a second, non-colour encoding.
+#: Sensor as a second, non-color encoding.
 SENSOR_MARKER = {"olci": "o", "pace": "^"}
 SENSOR_LABEL = {"olci": "OLCI ~550 m", "pace": "PACE ~1.2 km"}
 
@@ -62,7 +62,7 @@ class StageConfig:
 
 
 def style() -> None:
-    """Recessive axes, thin marks, ink-coloured text — applied once."""
+    """Recessive axes, thin marks, ink-colored text — applied once."""
     mpl.rcParams.update({
         "figure.facecolor": SURFACE, "axes.facecolor": SURFACE,
         "savefig.facecolor": SURFACE,
@@ -209,7 +209,7 @@ def ladder_patch(scene_key: str, scalar: str = "ratio") -> tuple[np.ndarray, Sce
     range — so the variance split and the CV table describe the same quantity.
 
     ``scalar="band"`` gives plain 560 nm reflectance, so the split can be reported for a
-    brightness field as well as a colour one. It needs no range guard: the split is a
+    brightness field as well as a color one. It needs no range guard: the split is a
     ratio of variances, and variance is shift-invariant, so the additive atmospheric
     pedestal cancels out of it exactly.
     """
@@ -230,7 +230,7 @@ def ladder_patch(scene_key: str, scalar: str = "ratio") -> tuple[np.ndarray, Sce
             field = np.where(water, tio.band_ratio(pair, 560.0, 490.0, source=rrs).values,
                              np.nan)
         # The same physical guard stage 3 applies: a ratio outside this range is a failed
-        # pedestal removal, not a water spectrum, and it would dominate both the colour
+        # pedestal removal, not a water spectrum, and it would dominate both the color
         # stretch and any dispersion statistic computed from the panel.
         field = np.where((field >= 0.2) & (field <= 5.0), field, np.nan)
 

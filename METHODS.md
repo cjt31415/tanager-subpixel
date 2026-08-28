@@ -30,8 +30,8 @@ A ratio also divides out multiplicative error, which an uncorrected atmosphere l
 A second scalar, plain 560 nm reflectance, is carried through the identical path and
 reported beside the first throughout — see §3.
 
-**Binning.** Each 30 m water pixel is assigned to the nearest coarse pixel centre — a
-Voronoi partition, via a KD-tree in the scene's UTM metres. For a smooth swath this is
+**Binning.** Each 30 m water pixel is assigned to the nearest coarse pixel center — a
+Voronoi partition, via a KD-tree in the scene's UTM meters. For a smooth swath this is
 equivalent to rasterising footprint polygons and has no topology to get wrong. A coarse
 pixel enters the analysis only if **≥ 90 %** of it is Tanager water, which is what keeps
 shoreline and swath-edge cells out. That leaves a median of 308–378 Tanager pixels inside
@@ -111,12 +111,12 @@ Ontario / OLCI), 0.4× (Lake Ontario / PACE), 1.9× and 1.2× (Loreto), and 0.9�
 Francisco Bay) — the brightness row of the memo's split, restated in the protocol's terms.
 Both variants come from the same code and both are in the verdict ledger; neither is shown
 without the other. A reader who repeats this analysis on a single band will get the second
-set of numbers, and that is the brightness/colour result, not a discrepancy.
+set of numbers, and that is the brightness/color result, not a discrepancy.
 
-**San Francisco Bay is worth reading twice.** Its colour ratio of 1.3× is the lowest here,
+**San Francisco Bay is worth reading twice.** Its color ratio of 1.3× is the lowest here,
 but that is a statement about *how much* structure the scene has, not where it lives: the
-water is uniformly turbid at half a kilometre, so the within-pixel CV is 0.022 against
-0.13–0.14 elsewhere. On the scale question it agrees with the others — 69 % of its colour
+water is uniformly turbid at half a kilometer, so the within-pixel CV is 0.022 against
+0.13–0.14 elsewhere. On the scale question it agrees with the others — 69 % of its color
 variance is inside an OLCI cell.
 
 ## 4. The three supporting checks
@@ -153,7 +153,7 @@ variance is inside an OLCI cell.
   300 m. The ladder is 30 m → ~550 m → ~1.2 km, and the memo says ~550 m for that reason.
 - Variability is measured on a **band ratio**, not chlorophyll: a ratio survives
   multiplicative error, and chlorophyll algorithms are not valid in the turbid and
-  optically shallow parts of these scenes. The ratio is the colour signal a chlorophyll
+  optically shallow parts of these scenes. The ratio is the color signal a chlorophyll
   retrieval is built from, not the retrieval itself — and the step from one to the other
   is not measured here.
 - **No in-situ data are used.** That is the point of the tasking section: this study
