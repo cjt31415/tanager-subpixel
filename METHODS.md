@@ -43,8 +43,8 @@ each OLCI cell and 1,590–3,075 inside each PACE pixel.
 
 **The protocol, applied as the protocol applies it.** Bailey & Werdell (2006) take a 5×5
 box of coarse pixels, require ≥ 50 % of it valid, apply an iterated 1.5σ rejection, and
-accept the match-up when the coefficient of variation across the surviving pixels is below
-0.15. We reproduce that on **the coarse sensor's own retrieval** — OLCI's 560 nm
+accept the match-up when the coefficient of variation (CV) across the surviving pixels is
+below 0.15. We reproduce that on **the coarse sensor's own retrieval** — OLCI's 560 nm
 reflectance, or PACE's `chlor_a` — because that is what a real match-up filters on. That
 statistic decides which boxes pass, and nothing else.
 

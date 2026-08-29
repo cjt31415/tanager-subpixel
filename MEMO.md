@@ -16,8 +16,8 @@ Tanager Open Data Competition · three open scenes · methods and full results i
 Every satellite ocean-color product is validated the same way: a satellite pixel is
 compared against an in-situ measurement, and the match-up is accepted only if the water
 looks homogeneous. The standard test (Bailey & Werdell 2006) takes a 5×5 box of satellite
-pixels around the station and accepts it when the **coefficient of variation across the box's
-surviving pixels is below 0.15**.
+pixels around the station and accepts it when the **coefficient of variation (CV) across the
+box's surviving pixels is below 0.15**.
 
 That is a *between-pixel* statistic. It says nothing about the water **inside** each
 pixel — and it cannot, because the sensor doing the filtering is the sensor being
