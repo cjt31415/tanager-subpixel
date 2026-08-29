@@ -6,8 +6,8 @@
       "total_variance_30m": 0.022244039810488718,
       "olci": {
         "factor": 18,
-        "between_cell_fraction": 0.30801488794399345,
-        "within_cell_fraction": 0.6919851120560065
+        "between_cell_fraction": 0.2985932945293665,
+        "within_cell_fraction": 0.7014067054706334
       },
       "pace": {
         "factor": 40,
@@ -20,8 +20,8 @@
       "total_variance_30m": 7.134501128069806e-05,
       "olci": {
         "factor": 18,
-        "between_cell_fraction": 0.2862810931894515,
-        "within_cell_fraction": 0.7137189068105485
+        "between_cell_fraction": 0.2945115009283449,
+        "within_cell_fraction": 0.7054884990716551
       },
       "pace": {
         "factor": 40,
@@ -37,8 +37,8 @@
       "total_variance_30m": 0.20775884978450165,
       "olci": {
         "factor": 18,
-        "between_cell_fraction": 0.28822363096560605,
-        "within_cell_fraction": 0.7117763690343939
+        "between_cell_fraction": 0.28825479535555976,
+        "within_cell_fraction": 0.7117452046444402
       },
       "pace": {
         "factor": 40,
@@ -51,8 +51,8 @@
       "total_variance_30m": 4.560138285714458e-06,
       "olci": {
         "factor": 18,
-        "between_cell_fraction": 0.8579548835740951,
-        "within_cell_fraction": 0.1420451164259049
+        "between_cell_fraction": 0.8638126796106759,
+        "within_cell_fraction": 0.13618732038932413
       },
       "pace": {
         "factor": 40,
@@ -68,8 +68,8 @@
       "total_variance_30m": 0.08114550750090962,
       "olci": {
         "factor": 18,
-        "between_cell_fraction": 0.3177742032676024,
-        "within_cell_fraction": 0.6822257967323976
+        "between_cell_fraction": 0.31547103219362094,
+        "within_cell_fraction": 0.6845289678063791
       },
       "pace": {
         "factor": 40,
@@ -82,8 +82,8 @@
       "total_variance_30m": 2.8423600909365235e-05,
       "olci": {
         "factor": 18,
-        "between_cell_fraction": 0.8173423844714586,
-        "within_cell_fraction": 0.18265761552854143
+        "between_cell_fraction": 0.8161047202878096,
+        "within_cell_fraction": 0.18389527971219044
       },
       "pace": {
         "factor": 40,

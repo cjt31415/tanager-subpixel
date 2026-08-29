@@ -165,21 +165,29 @@ LADDER_FACTORS = ((1, "Tanager  30 m"), (18, "OLCI  ~550 m"), (40, "PACE  ~1.2 k
 LADDER_PATCH_PIXELS = 480
 
 
-def variance_between(array: np.ndarray, factor: int) -> float:
-    """The part of the total variance that survives averaging into ``factor`` blocks.
+def variance_split(array: np.ndarray, factor: int) -> tuple[float, float]:
+    """``(between, total)``: the 30 m variance, and the part of it that survives
+    averaging into ``factor`` × ``factor`` blocks.
 
     The law of total variance splits the 30 m variance exactly into a *between-cell*
     part, which a coarse sensor can see, and a *within-cell* part, which it cannot. The
     two sum to the total by construction, which is why this is the honest ladder
     statistic — a ratio of panel variances is not, and can exceed one.
 
+    The identity only holds over a clean partition, so both numbers are computed over the
+    same pixels: the window trimmed to a whole number of blocks (468 px for factor 18,
+    480 px for factor 40), with each block weighted by its finite-pixel count. Computing
+    ``total`` over the untrimmed window instead leaked up to one percentage point.
+
     It is also the one headline number in this experiment that needs no threshold and no
     second instrument: one field, one window, two scales.
     """
     if factor == 1:
-        return float(np.nanvar(array))
+        total = float(np.nanvar(array))
+        return total, total
     rows_, cols_ = array.shape
     trimmed = array[:rows_ // factor * factor, :cols_ // factor * factor]
+    total = float(np.nanvar(trimmed))
     shaped = trimmed.reshape(trimmed.shape[0] // factor, factor,
                              trimmed.shape[1] // factor, factor)
     counts = np.isfinite(shaped).sum(axis=(1, 3))
@@ -187,8 +195,9 @@ def variance_between(array: np.ndarray, factor: int) -> float:
         means = np.nanmean(shaped, axis=(1, 3))
     valid = counts > 0
     grand = float(np.nansum(means[valid] * counts[valid]) / counts[valid].sum())
-    return float(np.nansum(counts[valid] * (means[valid] - grand) ** 2)
-                 / counts[valid].sum())
+    between = float(np.nansum(counts[valid] * (means[valid] - grand) ** 2)
+                    / counts[valid].sum())
+    return between, total
 
 
 def block(array: np.ndarray, factor: int) -> np.ndarray:
@@ -275,9 +284,10 @@ def variance_splits(config: StageConfig) -> dict:
                 "total_variance_30m": total,
                 **{label.split()[0].lower(): {
                     "factor": factor,
-                    "between_cell_fraction": variance_between(patch, factor) / total,
-                    "within_cell_fraction": 1 - variance_between(patch, factor) / total}
-                   for factor, label in LADDER_FACTORS if factor > 1},
+                    "between_cell_fraction": between / block_total,
+                    "within_cell_fraction": 1 - between / block_total}
+                   for factor, label in LADDER_FACTORS if factor > 1
+                   for between, block_total in [variance_split(patch, factor)]},
             }
             logger.info("%s/%s: %.0f%% of the 30 m variance is hidden inside an OLCI "
                         "cell, %.0f%% inside a PACE pixel", scene.key, scalar,
@@ -306,8 +316,6 @@ def figure_ladder(config: StageConfig, scene_key: str = "lake_ontario") -> Path:
     cmap = mpl.colors.LinearSegmentedColormap.from_list("seq", SEQUENTIAL)
     finite = patch[np.isfinite(patch)]
     low, high = np.percentile(finite, [8, 92])
-    total_variance = float(np.nanvar(patch))
-
     figure, axes_row = plt.subplots(1, 3, figsize=(10.4, 3.9))
     for axes, (factor, label) in zip(axes_row, LADDER_FACTORS, strict=True):
         image = block(patch, factor) if factor > 1 else patch
@@ -318,7 +326,8 @@ def figure_ladder(config: StageConfig, scene_key: str = "lake_ontario") -> Path:
         for spine in axes.spines.values():
             spine.set_visible(True)
             spine.set_color(INK_MUTED)
-        between = variance_between(patch, factor) / total_variance if total_variance else np.nan
+        between_variance, total_variance = variance_split(patch, factor)
+        between = between_variance / total_variance if total_variance else np.nan
         axes.text(0.5, -0.13, f"{image.shape[0]}×{image.shape[1]} cells\n"
                   f"{between:.0%} of the variance is between cells\n"
                   f"{1 - between:.0%} is hidden inside them",

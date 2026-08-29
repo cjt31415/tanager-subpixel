@@ -16,8 +16,8 @@ Tanager Open Data Competition · three open scenes · methods and full results i
 Every satellite ocean-color product is validated the same way: a satellite pixel is
 compared against an in-situ measurement, and the match-up is accepted only if the water
 looks homogeneous. The standard test (Bailey & Werdell 2006) takes a 5×5 box of satellite
-pixels around the station and accepts it when the **coefficient of variation across those
-25 pixels is below 0.15**.
+pixels around the station and accepts it when the **coefficient of variation across the box's
+surviving pixels is below 0.15**.
 
 That is a *between-pixel* statistic. It says nothing about the water **inside** each
 pixel — and it cannot, because the sensor doing the filtering is the sensor being
@@ -25,8 +25,8 @@ validated. A PACE pixel is 1.2 km across. The protocol assumes what happens insi
 uniform enough not to matter. That assumption has never been checked with a
 hyperspectral sensor, on the same day, at this ratio of samples per pixel.
 
-Tanager can. At 30 m it resolves ~300 samples inside one Sentinel-3 OLCI cell (Copernicus L3) and
-1,600–3,000 inside one PACE pixel. We took three open Tanager scenes with same-day PACE
+Tanager can. At 30 m it resolves ~300–380 samples inside one Sentinel-3 OLCI cell (Copernicus
+L3) and 1,600–3,000 inside one PACE pixel. We took three open Tanager scenes with same-day PACE
 OCI and Sentinel-3 OLCI coverage, binned every 30 m water pixel into the coarse pixel that
 contains it, and asked the question the protocol cannot: **where, across scale, does the
 water's variance actually sit?**
@@ -37,13 +37,13 @@ water's variance actually sit?**
 | Lake Ontario (Rochester), 2025-09-19 | 17:02:33 | 17:39:46 | 37 min | same day |
 | Loreto, Gulf of California, 2025-08-31 | 18:51:20 | 19:35:44 | 44 min | same day |
 
-*Times UTC. Δt is Tanager − PACE. OLCI comes from the Copernicus daily L3 merge, which
+*Times UTC; Δt unsigned. OLCI comes from the Copernicus daily L3 merge, which
 keeps no pass time; the S3A time for San Francisco Bay is from the Sentinel-3 catalog.*
 
 Before any 30 m claim, Tanager has to reproduce a sensor that has none of its problems at
 a scale that sensor can see. Aggregated onto the OLCI grid it reproduces OLCI's *spatial
-variability* — not merely its pattern — to within **9 %** at Lake Ontario, and 44–80 %
-high at the two hazier scenes. The residual there is multiplicative, which the green/blue
+variability* — not merely its pattern — to within **13 %** at Lake Ontario (9 % at 560 nm),
+and 44–80 % high at the two hazier scenes. The residual there is multiplicative, which the green/blue
 ratio divides out, and the headline below is a *fraction* of variance, which no overall
 scale factor can move. That is what licenses everything below (METHODS §2).
 
@@ -63,7 +63,7 @@ for two quantities: the green/blue ratio, and plain 560 nm reflectance.
 
 | scene | | hidden inside an OLCI cell (~550 m) | hidden inside a PACE pixel (~1.2 km) |
 |---|---|---|---|
-| San Francisco Bay | color · brightness | 69 % · 71 % | 75 % · 78 % |
+| San Francisco Bay | color · brightness | 70 % · 71 % | 75 % · 78 % |
 | Lake Ontario | color · brightness | **71 %** · 14 % | **75 %** · 27 % |
 | Loreto, Gulf of California | color · brightness | 68 % · 18 % | 78 % · 35 % |
 

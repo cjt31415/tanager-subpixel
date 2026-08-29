@@ -30,6 +30,10 @@ A ratio also divides out multiplicative error, which an uncorrected atmosphere l
 A second scalar, plain 560 nm reflectance, is carried through the identical path and
 reported beside the first throughout — see §3.
 
+**Coincidence.** The memo's table gives the same PACE time, 19:35:44 UTC, at San Francisco
+Bay and at Loreto, 109 days apart. That is not a transcription slip: both L2 granules are
+stamped `T193544` (`pipeline/scenes.yaml`, and the NASA CMR catalog lists both).
+
 **Binning.** Each 30 m water pixel is assigned to the nearest coarse pixel center — a
 Voronoi partition, via a KD-tree in the scene's UTM meters. For a smooth swath this is
 equivalent to rasterising footprint polygons and has no topology to get wrong. A coarse
@@ -46,9 +50,16 @@ statistic decides which boxes pass, and nothing else.
 
 **The variance split** (the memo's headline) uses none of that. It applies the law of
 total variance to a single 480 × 480 pixel window — 14.4 km, wider than a 5×5 PACE box —
-block-averaged to each coarse scale. The between-cell and within-cell parts sum to the
-total by construction, which is why this is the honest ladder statistic; a ratio of panel
-variances is not, and can exceed one.
+block-averaged into square blocks of 18 × 18 Tanager pixels (540 m, standing in for the
+OLCI cell) and 40 × 40 (1,200 m, for PACE). The blocks are not the coarse sensors' own
+grid cells; they are a clean partition of the window at each sensor's scale, which is
+what the identity needs. The window is trimmed to a whole number of blocks (468 px at the
+OLCI scale, 480 at PACE's) and both the total and the between-block variance are
+computed over the same trimmed pixels, each block weighted by its count of finite 30 m
+pixels. The between-cell and within-cell parts then sum to the total exactly, which is
+why this is the honest ladder statistic; a ratio of panel variances is not, and can
+exceed one. (An earlier draft took the total over the untrimmed window; that leaked up
+to one percentage point, and the numbers here are the exact ones.)
 
 **A guard worth declaring.** A coefficient of variation diverges as its mean approaches
 zero, so a coarse pixel whose mean green/blue ratio falls outside 0.2–5.0 is not reporting
@@ -66,7 +77,7 @@ scale that sensor can see. Aggregating Tanager onto the OLCI grid and comparing,
 
 | scene | 443 nm | 490 nm | 560 nm |
 |---|---|---|---|
-| Lake Ontario (n = 952) | r 0.78 · ×0.90 | r 0.92 · ×1.13 | r 0.96 · **×1.09** |
+| Lake Ontario (n = 952) | r 0.78 · ×0.90 | r 0.92 · **×1.13** | r 0.95 · ×1.09 |
 | San Francisco Bay (n = 205) | r 0.67 · ×0.95 | r 0.82 · ×1.53 | r 0.88 · ×1.80 |
 | Loreto (n = 685) | r 0.58 · ×1.03 | r 0.81 · ×1.49 | r 0.82 · ×1.44 |
 
@@ -76,8 +87,8 @@ second number is the regression slope — the factor by which Tanager over- or u
 OLCI's spatial variability at ~550 m. Both sides are remote-sensing reflectance in sr⁻¹,
 so parity is a slope of 1.
 
-Tanager reproduces OLCI's variability to within **9 %** at Lake Ontario and runs 44–80 %
-high at Loreto and San Francisco Bay, the two scenes with a heavier atmospheric residual
+Tanager reproduces OLCI's variability to within **13 %** at Lake Ontario (×1.13 at 490 nm,
+×1.09 at 560 nm) and runs 44–80 % high at Loreto and San Francisco Bay, the two scenes with a heavier atmospheric residual
 (§5). It is not a calibration; it is enough to license a claim about a factor of three to
 five.
 
@@ -90,15 +101,21 @@ scene rather than the best of nine.
 
 Across 1,528 boxes that pass the standard filter, the variance inside the accepted pixels
 against the variance across them — both measured on the same Tanager green/blue ratio over
-the same 5×5 window:
+the same 5×5 window. The box column below sums to 1,526: two Lake Ontario / OLCI boxes pass
+the filter (675 do) but fall outside the 0.2–5.0 ratio guard of §1, so they count toward
+the 1,528 and toward the last two columns, and not toward the CVs. San Francisco Bay / PACE
+has no row: only 9 PACE pixels in that frame are ≥ 90 % water, so no 5×5 box can meet the
+protocol's 50 % validity requirement, and nothing there passes or fails.
 
-| scene / sensor | boxes passing | between-pixel CV | within-pixel CV | ratio | passing boxes containing a pixel with interior CV > 0.15 |
-|---|---|---|---|---|---|
-| Lake Ontario / OLCI | 673 | 0.026 | **0.139** | **5.4×** | 66 % |
-| Lake Ontario / PACE | 100 | 0.023 | **0.106** | **4.6×** | 69 % |
-| Loreto / OLCI | 470 | 0.037 | **0.135** | **3.6×** | 71 % |
-| Loreto / PACE | 40 | 0.039 | **0.129** | **3.3×** | 98 % |
-| San Francisco Bay / OLCI | 243 | 0.017 | 0.022 | 1.3× | 29 % |
+| scene / sensor | boxes passing | between-pixel CV | within-pixel CV | ratio | passing boxes whose *center* pixel has interior CV > 0.15 | … containing *any* such pixel |
+|---|---|---|---|---|---|---|
+| Lake Ontario / OLCI | 673 | 0.026 | **0.139** | **5.4×** | 48 % | 66 % |
+| Lake Ontario / PACE | 100 | 0.023 | **0.106** | **4.6×** | 30 % | 69 % |
+| Loreto / OLCI | 470 | 0.037 | **0.135** | **3.6×** | 38 % | 71 % |
+| Loreto / PACE | 40 | 0.039 | **0.129** | **3.3×** | 35 % | 98 % |
+| San Francisco Bay / OLCI | 243 | 0.017 | 0.022 | 1.3× | 1 % | 29 % |
+
+Weighted by boxes, the two right-hand columns are the memo's 36 % and 63 %.
 
 Both columns are the same scalar on the same instrument, differing only in scale, so the
 ratio is a decomposition rather than a comparison of unlike things. The protocol's own
@@ -116,7 +133,7 @@ set of numbers, and that is the brightness/color result, not a discrepancy.
 **San Francisco Bay is worth reading twice.** Its color ratio of 1.3× is the lowest here,
 but that is a statement about *how much* structure the scene has, not where it lives: the
 water is uniformly turbid at half a kilometer, so the within-pixel CV is 0.022 against
-0.13–0.14 elsewhere. On the scale question it agrees with the others — 69 % of its color
+0.13–0.14 elsewhere. On the scale question it agrees with the others — 70 % of its color
 variance is inside an OLCI cell.
 
 ## 4. The three supporting checks
@@ -124,8 +141,8 @@ variance is inside an OLCI cell.
 - **It is water, not noise.** Within-pixel variability is spatially structured: adjacent
   coarse pixels differ by 0.17–0.44 of what the same field gives after being spatially
   shuffled (a shuffled field scores 1.0 by construction). Structured in 4 of 5 assessable
-  scene/sensor pairings; marginal at 0.79 for Loreto/PACE, which we report rather than
-  drop, and not assessable on San Francisco Bay/PACE, where only 19 adjacent finite pairs
+  scene/sensor pairings; above the 0.75 bar at 0.79 for Loreto/PACE — a fail, which we
+  report rather than drop — and not assessable on San Francisco Bay/PACE, where only 19 adjacent finite pairs
   exist and the statistic is undefined rather than failed.
 - **It clears the instrument's own floor.** Median within-pixel CV is 1.5× (San Francisco
   Bay), 5.1× (Lake Ontario) and 5.5× (Loreto) the relative uncertainty Planet's own
@@ -139,7 +156,7 @@ variance is inside an OLCI cell.
   Lake Ontario 0.0025 (physical), Loreto 0.0090 (close), San Francisco Bay 0.0971 — the
   scene Planet flags at 29 % light haze. This tracks the validation table in §2: Lake
   Ontario, the cleanest correction, is also the scene that reproduces OLCI's spread to
-  within 9 %. The diagnostic is free and we recommend it as routine practice for anyone
+  within 13 %. The diagnostic is free and we recommend it as routine practice for anyone
   using Tanager surface reflectance over water. We removed the residual per band from the
   darkest water in each scene.
 - **Every CV here is a lower bound.** An additive residual inflates a mean and leaves a
