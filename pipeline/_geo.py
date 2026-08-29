@@ -144,7 +144,10 @@ def top_boxes(df: pd.DataFrame, *, box_deg: tuple[float, float], top_n: int = 5,
     separation = int(round(min_separation_deg / cell_deg))
     chosen: list[tuple[int, int]] = []
     rows = []
-    for flat in np.argsort(score.ravel())[::-1]:
+    # Stable sort on the negated score: ties (two anchors holding the same floats) break
+    # on the lowest flat index, identically on every numpy. The default introsort is
+    # not stable and picked different Ligurian anchors on numpy 2.2 and 2.4.
+    for flat in np.argsort(-score.ravel(), kind="stable"):
         if len(chosen) == top_n:
             break
         anchor_y, anchor_x = np.unravel_index(flat, score.shape)

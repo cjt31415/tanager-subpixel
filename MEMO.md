@@ -107,7 +107,7 @@ Three things follow, in increasing order of effort:
    about different scales, and the first is not evidence for the second.
 3. **Measure the term, at the sites where it matters.** It is now measurable. That is a
    tasking question, and it is the one thing this study could not do: none of the 153 open
-   Tanager scenes lies within 116 km of a dense BGC-Argo box, and the two over Lake Erie
+   Tanager scenes lies within 275 km of a dense BGC-Argo box, and the two over Lake Erie
    miss every GLERL station.
 
 **Who this reaches:** every satellite ocean-color validation program — NASA's PACE
@@ -136,7 +136,7 @@ the same question of a fixed in-situ network instead.
   One Tanager footprint would cover the mooring, the float cluster and the water they
   share — and would, for the first time, put a measured sub-pixel term on a
   satellite-to-float chlorophyll match-up rather than an assumed one. **The nearest open
-  Tanager scene is 645 km away, inland in Germany; no open scene lies within 116 km of
+  Tanager scene is 645 km away, inland in Germany; no open scene lies within 275 km of
   any of the top float boxes.**
 - **Freshwater — western Lake Erie (center 41.80 °N, 83.28 °W).** The longest
   cyanobacteria-bloom record in North America, with NOAA GLERL/CIGLR sampling three depths
@@ -152,7 +152,7 @@ exists, and they miss each other by ten kilometers.
 
 ***Where a Tanager scene would buy the most.** The densest BGC-Argo boxes, one
 Tanager footprint each (marker area = distinct floats), the 153 open Tanager scenes, and
-the proposed western Lake Erie frame. No open scene lies within 116 km of any float
+the proposed western Lake Erie frame. No open scene lies within 275 km of any float
 box.*
 
 ## Limitations

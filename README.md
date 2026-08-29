@@ -21,7 +21,7 @@ documentation.
   match-up certifies is color-derived. **The filter is screening the one quantity that
   passes its own test.**
 - The open scenes and the in-situ networks miss each other. The nearest open scene to
-  the densest BGC-Argo box is 645 km away, none is within 116 km of any top box, and the
+  the densest BGC-Argo box is 645 km away, none is within 275 km of any top box, and the
   two over western Lake Erie miss all 16 NOAA GLERL stations by 10 km.
 
 The satellite-to-float join this bears on is an active one — see
